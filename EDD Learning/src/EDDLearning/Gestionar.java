@@ -4,6 +4,14 @@ package EDDLearning;
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
 import static EDDLearning.Main.tablausuarios;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +28,7 @@ public class Gestionar extends javax.swing.JFrame {
         initComponents();
         tusuarios.setModel(modelo);
         AgregarUsuarios();
-        this.setTitle("EDD Learning | MANAGE USERS - By Oscar Llamas");
+        this.setTitle("EDD Learning | GESTIONAR USUARIOS - By Oscar Llamas");
         this.setLocationRelativeTo(null);
         txtNombre.setVisible(false);
         txtApellido.setVisible(false);
@@ -80,6 +88,8 @@ public class Gestionar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        breportes = new javax.swing.JButton();
+        lreportes = new javax.swing.JLabel();
         checkpass = new javax.swing.JCheckBox();
         beliminar = new javax.swing.JButton();
         leliminar = new javax.swing.JLabel();
@@ -101,6 +111,24 @@ public class Gestionar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        breportes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        breportes.setForeground(new java.awt.Color(0, 0, 0));
+        breportes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/reportes1.png"))); // NOI18N
+        breportes.setBorder(null);
+        breportes.setContentAreaFilled(false);
+        breportes.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/reportes2.png"))); // NOI18N
+        breportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                breportesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(breportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 460, 70, 70));
+
+        lreportes.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lreportes.setForeground(new java.awt.Color(255, 255, 255));
+        lreportes.setText("REPORTE");
+        getContentPane().add(lreportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 530, 70, 30));
+
         checkpass.setBackground(new java.awt.Color(0, 0, 0));
         checkpass.setForeground(new java.awt.Color(255, 255, 255));
         checkpass.setText("Mostrar contraseña.");
@@ -114,7 +142,7 @@ public class Gestionar extends javax.swing.JFrame {
                 checkpassActionPerformed(evt);
             }
         });
-        getContentPane().add(checkpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 590, -1, -1));
+        getContentPane().add(checkpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 590, -1, -1));
 
         beliminar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         beliminar.setForeground(new java.awt.Color(0, 0, 0));
@@ -127,12 +155,12 @@ public class Gestionar extends javax.swing.JFrame {
                 beliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(beliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, 70, 70));
+        getContentPane().add(beliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 460, 70, 70));
 
         leliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         leliminar.setForeground(new java.awt.Color(255, 255, 255));
         leliminar.setText("ELIMINAR");
-        getContentPane().add(leliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 560, 70, 30));
+        getContentPane().add(leliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 530, 70, 30));
 
         txtpass.setBackground(new java.awt.Color(255, 255, 255));
         txtpass.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -142,12 +170,12 @@ public class Gestionar extends javax.swing.JFrame {
                 txtpassActionPerformed(evt);
             }
         });
-        getContentPane().add(txtpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 550, 250, 40));
+        getContentPane().add(txtpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 540, 250, 40));
 
         lpass.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lpass.setForeground(new java.awt.Color(255, 255, 255));
         lpass.setText("CONTRASEÑA:");
-        getContentPane().add(lpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 140, 30));
+        getContentPane().add(lpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 540, 140, 30));
 
         bguardar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         bguardar.setForeground(new java.awt.Color(0, 0, 0));
@@ -160,32 +188,32 @@ public class Gestionar extends javax.swing.JFrame {
                 bguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(bguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 490, 70, 70));
+        getContentPane().add(bguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 460, 70, 70));
 
         lguardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lguardar.setForeground(new java.awt.Color(255, 255, 255));
         lguardar.setText("GUARDAR");
-        getContentPane().add(lguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 560, 70, 30));
+        getContentPane().add(lguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 540, 70, 30));
 
         lapellido.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lapellido.setForeground(new java.awt.Color(255, 255, 255));
         lapellido.setText("APELLIDO:");
-        getContentPane().add(lapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 100, 30));
+        getContentPane().add(lapellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 490, 100, 30));
 
         txtApellido.setBackground(new java.awt.Color(255, 255, 255));
         txtApellido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtApellido.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 250, 40));
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 250, 40));
 
         lnombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lnombre.setForeground(new java.awt.Color(255, 255, 255));
         lnombre.setText("NOMBRE:");
-        getContentPane().add(lnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 450, 100, 30));
+        getContentPane().add(lnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 100, 30));
 
         txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, 250, 40));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 250, 40));
 
         scrollusers.setEnabled(false);
 
@@ -209,24 +237,24 @@ public class Gestionar extends javax.swing.JFrame {
         });
         scrollusers.setViewportView(tusuarios);
 
-        getContentPane().add(scrollusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 830, 310));
+        getContentPane().add(scrollusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 870, 310));
 
         lgoback.setForeground(new java.awt.Color(255, 255, 255));
         lgoback.setText("GO BACK");
-        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 590, 60, 30));
+        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 60, 30));
 
-        bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/goback1.png"))); // NOI18N
+        bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);
         bsalir.setBorderPainted(false);
         bsalir.setContentAreaFilled(false);
         bsalir.setFocusPainted(false);
-        bsalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/goback2.png"))); // NOI18N
+        bsalir.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp2.png"))); // NOI18N
         bsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bsalirActionPerformed(evt);
             }
         });
-        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 510, 80, 80));
+        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 50));
 
         lmanageusers.setFont(new java.awt.Font("Dialog", 1, 56)); // NOI18N
         lmanageusers.setForeground(new java.awt.Color(255, 255, 255));
@@ -318,6 +346,7 @@ public class Gestionar extends javax.swing.JFrame {
                }
             }
         }
+        tablausuarios.count--;
         tablausuarios.ReinsertarElementos();
         modelo.getDataVector().removeAllElements();
         modelo.fireTableDataChanged();
@@ -357,11 +386,25 @@ public class Gestionar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bguardarActionPerformed
 
+    private void breportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_breportesActionPerformed
+        tablausuarios.Graficar();
+        try {
+            TimeUnit.MILLISECONDS.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Gestionar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ReporteTablaHash reporte = new ReporteTablaHash(this, true);
+        reporte.setVisible(true);
+        reporte.revalidate();
+        reporte.repaint();
+    }//GEN-LAST:event_breportesActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton beliminar;
     private javax.swing.JButton bguardar;
+    private javax.swing.JButton breportes;
     private javax.swing.JButton bsalir;
     private javax.swing.JCheckBox checkpass;
     private javax.swing.JLabel fondo;
@@ -372,6 +415,7 @@ public class Gestionar extends javax.swing.JFrame {
     private javax.swing.JLabel lmanageusers;
     private javax.swing.JLabel lnombre;
     private javax.swing.JLabel lpass;
+    private javax.swing.JLabel lreportes;
     private javax.swing.JScrollPane scrollusers;
     private javax.swing.JTable tusuarios;
     private javax.swing.JTextField txtApellido;

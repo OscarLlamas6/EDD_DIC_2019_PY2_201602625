@@ -1,5 +1,7 @@
 package EDDLearning;
 
+import static EDDLearning.Main.tablausuarios;
+import javax.swing.JOptionPane;
 
 public class PanelAdmin extends javax.swing.JFrame {
 
@@ -105,9 +107,15 @@ public class PanelAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_lcargarActionPerformed
 
     private void bgestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bgestionarActionPerformed
-        Gestionar gestion = new Gestionar();
+        if(tablausuarios.count>0){
+            Gestionar gestion = new Gestionar();
         gestion.setVisible(true);
         this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "¡No hay usuarios cargados!"); 
+        }
+        
+        
     }//GEN-LAST:event_bgestionarActionPerformed
 
     /**

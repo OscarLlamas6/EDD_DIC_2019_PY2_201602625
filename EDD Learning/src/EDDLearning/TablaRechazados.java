@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TablaRechazados extends javax.swing.JDialog {
 
-    String header[]={"Nombre","Apellido","Carnet","Password"};
+    String header[]={"Nombre","Carnet","Password","Motivo"};
     String datos[][] = {};
     DefaultTableModel modelo = new DefaultTableModel(datos, header){
          public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
@@ -22,7 +22,7 @@ public class TablaRechazados extends javax.swing.JDialog {
         initComponents();
         tablausuarios.setModel(modelo);
         AgregarUsuarios(usuarios, x);
-        this.setTitle("EDD Learning | REJECTED USERS - By Oscar Llamas");
+        this.setTitle("EDD Learning | USUARIOS RECHAZADOS - By Oscar Llamas");
         this.setLocationRelativeTo(null);
         
     }
@@ -53,6 +53,7 @@ public class TablaRechazados extends javax.swing.JDialog {
         lfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tablausuarios.setBackground(new java.awt.Color(255, 255, 255));

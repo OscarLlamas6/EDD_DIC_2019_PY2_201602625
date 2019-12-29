@@ -23,7 +23,7 @@ public class Cargar extends javax.swing.JFrame {
     
     public Cargar() {
         initComponents();
-        this.setTitle("EDD Learning | LOAD JSON - By Oscar Llamas");
+        this.setTitle("EDD Learning | CARGAR JSON - By Oscar Llamas");
         this.setLocationRelativeTo(null);
     }
 
@@ -205,12 +205,13 @@ public class Cargar extends javax.swing.JFrame {
             if(rechazo){
                 TablaRechazados tr = new TablaRechazados(this, true, rechazados,jsonArray.size());
                 tr.setVisible(true);
-            }           
-            JOptionPane.showMessageDialog(this, "¡LOAD FINISHED!"); 
+            }
+                  
+            JOptionPane.showMessageDialog(this, "¡CARGA TERMINADA!"); 
             }           
             catch (Exception e) {
             }} else {
-           JOptionPane.showMessageDialog(this, "NO SELECTED FILE!"); 
+           JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!"); 
         }
     }//GEN-LAST:event_bcargarActionPerformed
 

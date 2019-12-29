@@ -3,6 +3,9 @@ package EDDLearning;
 
 
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Arrays;
 
 
@@ -118,6 +121,36 @@ public class TablaHash {
         }
     }
     
-    
+    public void Graficar(){
+        File file = new File("src/salida.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph HashTable{");
+            ps.println();
+            ps.println("node[shape=record];");
+            ps.println("rankdir=LR;");
+            ps.println();
+            int x = 0;
+            for(int i = 0; i < this.size; i++){
+                if(this.tabla[i]!=null){
+                   ps.println("node"+x+"[label=\"Clave: "+i+"\\n Nombre: "+this.tabla[i].getNombre()+"\\n Apellido: "+this.tabla[i].getApellido()+"\\n Carnet: "+this.tabla[i].getCarnet()+"\\n Password: "+this.tabla[i].getPassDes()+"\"];"); 
+                   x++;
+                }
+            }
+            ps.println();
+            for(int i = 0; i< x-1; i++){
+             ps.println("node"+i+"->node"+(i+1)+"[dir=none];");   
+            }
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng src/salida.dot -o src/Images/HashTableReport.png";
+            Process p = Runtime.getRuntime().exec(command);
+        } catch (IOException ex) {
+            
+        }  
+    }
     
 }
