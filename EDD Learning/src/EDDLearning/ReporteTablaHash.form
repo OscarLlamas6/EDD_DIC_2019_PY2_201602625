@@ -46,7 +46,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="this.revalidate();&#xa;this.validate();&#xa;this.repaint();"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon i = new ImageIcon(&quot;src/Images/HashTableReport.png&quot;);&#xa;i.getImage().flush();"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon i = new ImageIcon(&quot;C:/Reportes/HashTableReport.png&quot;);&#xa;i.getImage().flush();"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>

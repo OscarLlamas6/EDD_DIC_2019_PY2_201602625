@@ -1,10 +1,16 @@
+package EDDLearning;
+
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 
 
@@ -13,37 +19,45 @@ import java.util.logging.Logger;
 public class AVLTree {
     
     public class Node {
-        private Node izquierdo, derecho;
-        private int altura = 1;
-        private int dato;
+        public Node izquierdo, derecho;
+        public int altura = 1;
+        public int dato;
 
-        private Node (int val) {
+        public Node (int val) {
             this.dato = val;
         }
     }
     
     public Node root;
     public static String global = "";
+
+    public AVLTree(){
+        this.root = null;
+    }
     
-    private int altura (Node N) {
+    public int altura (Node N) {
         if (N == null)
             return 0;
         return N.altura;
     }
 
-    private Node insertAuto(Node node, int dato) {
+    public Node insertAuto(Node node, int dato) {
         if (node == null) {
             return(new Node(dato));
         }
 
-        if (dato < node.dato)
-            node.izquierdo  = insertAuto(node.izquierdo, dato);
-        else
+        if (dato < node.dato){
+        node.izquierdo  = insertAuto(node.izquierdo, dato);
+        }
+            
+        else{
             node.derecho = insertAuto(node.derecho, dato);
+        }
+            
 
         node.altura = Math.max(altura(node.izquierdo), altura(node.derecho)) + 1;
         int balance = getBalance(node);
-
+      
         // IZQUIERDA IZQUIERDA
         if (balance > 1 && dato < node.izquierdo.dato)
             return derechoRotate(node);
@@ -65,10 +79,11 @@ public class AVLTree {
             node.derecho = derechoRotate(node.derecho);
             return izquierdoRotate(node);
         }
+        
         return node;
     }
 
-    private Node insertManual(Node node, int dato) {
+    public Node insertManual(Node node, int dato) {
         if (node == null) {
             return(new Node(dato));
         }
@@ -105,7 +120,7 @@ public class AVLTree {
         return node;
     }
     
-    private Node derechoRotate(Node y) {
+    public Node derechoRotate(Node y) {
         Node x = y.izquierdo;
         Node T2 = x.derecho;
         x.derecho = y;
@@ -115,7 +130,7 @@ public class AVLTree {
         return x;
     }
 
-    private Node izquierdoRotate(Node x) {
+    public Node izquierdoRotate(Node x) {
         Node y = x.derecho;
         Node T2 = y.izquierdo;
         y.izquierdo = x;
@@ -125,7 +140,7 @@ public class AVLTree {
         return y;
     }
 
-    private int getBalance(Node N) {
+    public int getBalance(Node N) {
         if (N == null)
             return 0;
         return altura(N.izquierdo) - altura(N.derecho);
@@ -139,14 +154,15 @@ public class AVLTree {
         }
     }
 
-    private Node minValueNode(Node node) {
+    public Node minValueNode(Node node) {
         Node current = node;
         while (current.izquierdo != null)
             current = current.izquierdo;
         return current;
     }
 
-    private Node deleteNodeAuto(Node root, int dato) {
+    
+    public Node deleteNodeAuto(Node root, int dato) {
 
         if (root == null)
             return root;
@@ -214,7 +230,7 @@ public class AVLTree {
         return root;
     }
     
-    private Node deleteNodeManual(Node root, int dato) {
+    public Node deleteNodeManual(Node root, int dato) {
 
         if (root == null)
             return root;
@@ -298,6 +314,25 @@ public class AVLTree {
         }
     }
             
+   public void GraficarYSetear(JLabel label, JScrollPane scroll, JFrame frame){
+            Graficar();
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
+            i.getImage().flush();
+            label.setIcon(i);
+            label.setHorizontalAlignment(JLabel.CENTER);
+            label.validate();
+            label.revalidate();
+            scroll.setViewportView(label);
+            scroll.revalidate();
+            frame.revalidate();
+            frame.validate();
+            frame.repaint();
+   }
             
     public void Graficar() {
        File file = new File("salida.dot");
@@ -315,7 +350,7 @@ public class AVLTree {
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng src/salida.dot -o src/Images/AVLReport.png";
+            String command = "dot.exe -Tpng src/salida.dot -o src/Images/AVL.png";
             Process p = Runtime.getRuntime().exec(command);
         } catch (IOException ex) {
             

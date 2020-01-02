@@ -17,6 +17,7 @@ public class CargarArbol extends javax.swing.JFrame {
     public Boolean permitir = false;
     public String patch="";
     public Usuario useraux;
+    public ListaSimple numeros = null;
     
     public CargarArbol(Usuario useraux) {
         this.useraux = useraux;
@@ -52,22 +53,22 @@ public class CargarArbol extends javax.swing.JFrame {
         lelegir2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lelegir2.setForeground(new java.awt.Color(255, 255, 255));
         lelegir2.setText("ELIMINACIÓN AUTOMÁTICA");
-        getContentPane().add(lelegir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, 220, 30));
+        getContentPane().add(lelegir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 220, 30));
 
         lauto.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lauto.setForeground(new java.awt.Color(255, 255, 255));
         lauto.setText("ELIMINACIÓN MANUAL");
-        getContentPane().add(lauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, 160, 30));
+        getContentPane().add(lauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 560, 160, 30));
 
         lelegir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lelegir.setForeground(new java.awt.Color(255, 255, 255));
-        lelegir.setText("ELEGIR MODO Y TIPO DE EJECUCIÓN");
-        getContentPane().add(lelegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 340, 30));
+        lelegir.setText("ELEGIR MODO Y TIPO DE EJECUCIÓN:");
+        getContentPane().add(lelegir, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 340, 30));
 
         lmanualdelete.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lmanualdelete.setForeground(new java.awt.Color(255, 255, 255));
         lmanualdelete.setText("INSERCIÓN MANUAL");
-        getContentPane().add(lmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 510, 150, 30));
+        getContentPane().add(lmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 150, 30));
 
         bmanualdelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualdelete1.png"))); // NOI18N
         bmanualdelete.setBorder(null);
@@ -80,12 +81,12 @@ public class CargarArbol extends javax.swing.JFrame {
                 bmanualdeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 330, 150, 200));
+        getContentPane().add(bmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, 150, 200));
 
         lmanualadd.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lmanualadd.setForeground(new java.awt.Color(255, 255, 255));
         lmanualadd.setText("INSERCIÓN AUTOMÁTICA");
-        getContentPane().add(lmanualadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 510, 180, 30));
+        getContentPane().add(lmanualadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 180, 30));
 
         bmanualadd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualadd1.png"))); // NOI18N
         bmanualadd.setBorder(null);
@@ -98,7 +99,7 @@ public class CargarArbol extends javax.swing.JFrame {
                 bmanualaddActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 150, 200));
+        getContentPane().add(bmanualadd, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 150, 200));
 
         bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);
@@ -111,7 +112,7 @@ public class CargarArbol extends javax.swing.JFrame {
                 bsalirActionPerformed(evt);
             }
         });
-        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 550, 50, 50));
+        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 50, 50));
 
         bautodelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autodelete1.png"))); // NOI18N
         bautodelete.setBorder(null);
@@ -124,7 +125,7 @@ public class CargarArbol extends javax.swing.JFrame {
                 bautodeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(bautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 330, 150, 200));
+        getContentPane().add(bautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 150, 200));
 
         bautoinsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autoadd1.png"))); // NOI18N
         bautoinsert.setBorder(null);
@@ -137,11 +138,11 @@ public class CargarArbol extends javax.swing.JFrame {
                 bautoinsertActionPerformed(evt);
             }
         });
-        getContentPane().add(bautoinsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 150, 200));
+        getContentPane().add(bautoinsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 150, 200));
 
         lgoback.setForeground(new java.awt.Color(255, 255, 255));
         lgoback.setText("REGRESAR");
-        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 70, 30));
+        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 60, 70, 30));
 
         bbrowse.setBackground(new java.awt.Color(255, 255, 255));
         bbrowse.setFont(new java.awt.Font("Franklin Gothic Book", 1, 14)); // NOI18N
@@ -153,18 +154,23 @@ public class CargarArbol extends javax.swing.JFrame {
                 bbrowseActionPerformed(evt);
             }
         });
-        getContentPane().add(bbrowse, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 210, 120, 40));
+        getContentPane().add(bbrowse, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 120, 40));
 
         lnombrearchivo.setBackground(new java.awt.Color(255, 255, 255));
         lnombrearchivo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lnombrearchivo.setForeground(new java.awt.Color(0, 0, 0));
         lnombrearchivo.setFocusable(false);
-        getContentPane().add(lnombrearchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 380, 40));
+        lnombrearchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lnombrearchivoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(lnombrearchivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 380, 40));
 
-        lloadtree.setFont(new java.awt.Font("Dialog", 1, 56)); // NOI18N
+        lloadtree.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         lloadtree.setForeground(new java.awt.Color(255, 255, 255));
         lloadtree.setText("CARGAR JSON");
-        getContentPane().add(lloadtree, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        getContentPane().add(lloadtree, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 630));
@@ -183,6 +189,26 @@ public class CargarArbol extends javax.swing.JFrame {
             patch = buscador.getSelectedFile().getAbsolutePath();
             permitir = true;
         }
+        if(permitir){
+            try {
+            File file = new File(patch);
+            JSONParser parser = new JSONParser();                                 
+            FileReader reader = new FileReader(file.getAbsolutePath());
+            Object obj = parser.parse(reader); 
+            JSONObject jsonObj = (JSONObject)obj;
+            JSONArray jsonArray = (JSONArray) jsonObj.get("Input");
+            this.numeros = new ListaSimple();
+            for(Object Obj: jsonArray){
+                JSONObject o = (JSONObject) Obj;
+                String s = String.valueOf(o.get("num"));
+                int aux = Integer.parseInt(s);
+                numeros = numeros.insert(numeros, aux);
+            }
+                
+            }
+            catch (Exception e) {
+            }
+        }
     }//GEN-LAST:event_bbrowseActionPerformed
 
     private void bsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsalirActionPerformed
@@ -193,123 +219,32 @@ public class CargarArbol extends javax.swing.JFrame {
 
     private void bautoinsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bautoinsertActionPerformed
         if(permitir){
-            try {
-             File file = new File(patch);
-            JSONParser parser = new JSONParser();            
             lnombrearchivo.setText("");
-            patch = "";
+            patch = "";  
             permitir = false;
-            FileReader reader = new FileReader(file.getAbsolutePath());
-            Object obj = parser.parse(reader); 
-            JSONObject jsonObj = (JSONObject)obj;
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Input");
-            int [] numeros = new int[jsonArray.size()];
-            int n = 0;
-            for(Object Obj: jsonArray){
-                JSONObject o = (JSONObject) Obj;
-                String s = String.valueOf(o.get("num"));
-                int aux = Integer.parseInt(s);
-                numeros[n]=aux;
-                n++;
-            }
-             JOptionPane.showMessageDialog(this, "ARREGLO LISTO!");
-                
-            }
-            catch (Exception e) {
-            }} else {
+            InsercionAutomatica ia = new InsercionAutomatica(useraux, numeros);
+            ia.setVisible(true);
+            this.dispose();                      
+            } else {
                 JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
             }
     }//GEN-LAST:event_bautoinsertActionPerformed
 
     private void bautodeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bautodeleteActionPerformed
-         if(permitir){
-            try {
-             File file = new File(patch);
-            JSONParser parser = new JSONParser();            
-            lnombrearchivo.setText("");
-            patch = "";
-            permitir = false;
-            FileReader reader = new FileReader(file.getAbsolutePath());
-            Object obj = parser.parse(reader); 
-            JSONObject jsonObj = (JSONObject)obj;
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Input");
-            int [] numeros = new int[jsonArray.size()];
-            int n = 0;
-            for(Object Obj: jsonArray){
-                JSONObject o = (JSONObject) Obj;
-                String s = String.valueOf(o.get("num"));
-                int aux = Integer.parseInt(s);
-                numeros[n]=aux;
-                n++;
-            }
-             JOptionPane.showMessageDialog(this, "ARREGLO LISTO!");
-                
-            }
-            catch (Exception e) {
-            }} else {
-                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
-            }
+       
     }//GEN-LAST:event_bautodeleteActionPerformed
 
     private void bmanualaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualaddActionPerformed
-         if(permitir){
-            try {
-             File file = new File(patch);
-            JSONParser parser = new JSONParser();            
-            lnombrearchivo.setText("");
-            patch = "";
-            permitir = false;
-            FileReader reader = new FileReader(file.getAbsolutePath());
-            Object obj = parser.parse(reader); 
-            JSONObject jsonObj = (JSONObject)obj;
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Input");
-            int [] numeros = new int[jsonArray.size()];
-            int n = 0;
-            for(Object Obj: jsonArray){
-                JSONObject o = (JSONObject) Obj;
-                String s = String.valueOf(o.get("num"));
-                int aux = Integer.parseInt(s);
-                numeros[n]=aux;
-                n++;
-            }
-             JOptionPane.showMessageDialog(this, "ARREGLO LISTO!");
-                
-            }
-            catch (Exception e) {
-            }} else {
-                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
-            }
+     
     }//GEN-LAST:event_bmanualaddActionPerformed
 
     private void bmanualdeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualdeleteActionPerformed
-          if(permitir){
-            try {
-             File file = new File(patch);
-            JSONParser parser = new JSONParser();            
-            lnombrearchivo.setText("");
-            patch = "";
-            permitir = false;
-            FileReader reader = new FileReader(file.getAbsolutePath());
-            Object obj = parser.parse(reader); 
-            JSONObject jsonObj = (JSONObject)obj;
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Input");
-            int [] numeros = new int[jsonArray.size()];
-            int n = 0;
-            for(Object Obj: jsonArray){
-                JSONObject o = (JSONObject) Obj;
-                String s = String.valueOf(o.get("num"));
-                int aux = Integer.parseInt(s);
-                numeros[n]=aux;
-                n++;
-            }
-             JOptionPane.showMessageDialog(this, "ARREGLO LISTO!");
-                
-            }
-            catch (Exception e) {
-            }} else {
-                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
-            }
+       
     }//GEN-LAST:event_bmanualdeleteActionPerformed
+
+    private void lnombrearchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnombrearchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lnombrearchivoActionPerformed
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

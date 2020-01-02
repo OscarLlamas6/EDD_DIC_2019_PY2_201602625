@@ -1,0 +1,14 @@
+digraph AVL{
+
+node[shape=oval];
+
+100[xlabel="3"];
+45[xlabel="2"];
+6[xlabel="1"];
+45->6;
+200[xlabel="1"];
+100->45;
+100->200;
+
+
+}

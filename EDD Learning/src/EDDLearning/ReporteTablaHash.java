@@ -34,7 +34,7 @@ public class ReporteTablaHash extends javax.swing.JDialog {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ImageIcon i = new ImageIcon("src/Images/HashTableReport.png");
+        ImageIcon i = new ImageIcon("C:/Reportes/HashTableReport.png");
         i.getImage().flush();
         label_reporte.setIcon(i);
         scrollimagen.setViewportView(label_reporte);

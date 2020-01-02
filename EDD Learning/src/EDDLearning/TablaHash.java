@@ -122,7 +122,7 @@ public class TablaHash {
     }
     
     public void Graficar(){
-        File file = new File("src/salida.dot");
+        File file = new File("C:/Reportes/salida.dot");
        if (file.exists()){ file.delete();}
         try {
             file.createNewFile();
@@ -146,7 +146,7 @@ public class TablaHash {
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng src/salida.dot -o src/Images/HashTableReport.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/HashTableReport.png";
             Process p = Runtime.getRuntime().exec(command);
         } catch (IOException ex) {
             
