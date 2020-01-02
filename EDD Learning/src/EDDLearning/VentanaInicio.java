@@ -1,5 +1,8 @@
 package EDDLearning;
 
+import static EDDLearning.Cargar.getHash;
+import static EDDLearning.Main.tablausuarios;
+
 
 
 
@@ -88,7 +91,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         getContentPane().add(lHW, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login-wallpapaer.jpg"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -109,7 +112,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                 PanelAdmin padmin = new PanelAdmin();
                 padmin.setVisible(true);
                 this.dispose();
-            } else {
+            } else if(UsuarioExiste(txtID.getText().replaceAll("-", ""), txtPass.getText())!=null){
+                PanelUsuario pusuario = new PanelUsuario(UsuarioExiste(txtID.getText().replaceAll("-", ""), txtPass.getText()));
+                pusuario.setVisible(true);
+                this.dispose();
+            }  else {
                lanuncio.setText("Datos invalidos.!");
                 this.repaint(); 
             }
@@ -120,7 +127,31 @@ public class VentanaInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bLoginActionPerformed
 
-  
+    public Usuario UsuarioExiste(String carnet, String pass){
+        long clave = Long.parseLong(carnet);
+        int direccion = (int)(clave%tablausuarios.size);
+         if(tablausuarios.tabla[direccion]==null){
+            return null;
+        } else {
+            if(tablausuarios.tabla[direccion].getCarnet().equals(carnet) && tablausuarios.tabla[direccion].getPass().equals(getHash(pass.getBytes(), "SHA-256"))){
+                return tablausuarios.tabla[direccion];
+            }else {
+               int i = 0;
+               int aux = (int)(clave%7);
+               direccion = (aux+1)*i;
+               while(direccion<tablausuarios.size){
+                if(tablausuarios.tabla[direccion]==null){ return null;}
+                if(tablausuarios.tabla[direccion].getCarnet().equals(carnet) && tablausuarios.tabla[direccion].getPass().equals(getHash(pass.getBytes(), "SHA-256"))){
+                    return tablausuarios.tabla[direccion];
+                }
+                i++;
+                direccion = (aux+1)*i;
+                }
+               return null;
+            }
+        }  
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bLogin;

@@ -240,8 +240,8 @@ public class Gestionar extends javax.swing.JFrame {
         getContentPane().add(scrollusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 870, 310));
 
         lgoback.setForeground(new java.awt.Color(255, 255, 255));
-        lgoback.setText("GO BACK");
-        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 60, 30));
+        lgoback.setText("REGRESAR");
+        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 600, 70, 30));
 
         bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);

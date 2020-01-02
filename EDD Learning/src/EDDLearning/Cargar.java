@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import static EDDLearning.Main.tablausuarios;
+import java.util.Arrays;
 
 
 public class Cargar extends javax.swing.JFrame {
@@ -79,9 +80,9 @@ public class Cargar extends javax.swing.JFrame {
         });
         getContentPane().add(bcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, 150, 200));
 
-        bbrowse.setBackground(new java.awt.Color(0, 0, 0));
-        bbrowse.setFont(new java.awt.Font("Franklin Gothic Book", 1, 12)); // NOI18N
-        bbrowse.setForeground(new java.awt.Color(255, 255, 255));
+        bbrowse.setBackground(new java.awt.Color(255, 255, 255));
+        bbrowse.setFont(new java.awt.Font("Franklin Gothic Book", 1, 14)); // NOI18N
+        bbrowse.setForeground(new java.awt.Color(0, 0, 0));
         bbrowse.setText("EXAMINAR");
         bbrowse.setBorderPainted(false);
         bbrowse.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +104,7 @@ public class Cargar extends javax.swing.JFrame {
         getContentPane().add(lloadusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         lfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
-        getContentPane().add(lfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 630));
+        getContentPane().add(lfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1000, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,6 +174,7 @@ public class Cargar extends javax.swing.JFrame {
             Object obj = parser.parse(reader); 
             JSONArray jsonArray = (JSONArray)obj;
             UsuarioRechazado [] rechazados = new UsuarioRechazado[jsonArray.size()];
+            Arrays.fill(rechazados,null);
             int ur = 0;
             boolean rechazo = false;
             for(Object Obj: jsonArray){               
