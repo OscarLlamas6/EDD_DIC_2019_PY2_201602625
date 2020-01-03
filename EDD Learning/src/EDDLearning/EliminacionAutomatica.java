@@ -12,25 +12,67 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import EDDLearning.AVLTree.*;
-import javax.swing.SwingUtilities;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class EliminacionAutomatica extends javax.swing.JFrame {
 
+    public JFrame frame = this;
     public Usuario usuarioaux;
     public AVLTree arbol;
     public ListaSimple numeros;
     public static int velocidad = 1;
     public static String global = "";
+    public int x = 0;
+    public int y = 0;
+    Timer timer;
     
     public EliminacionAutomatica(Usuario usuarioaux, ListaSimple numeros) {
+        
+        this.timer = new Timer((velocidad*1000), new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if(y<x){
+                    ImageIcon icono = new ImageIcon("C:/Reportes/AVL"+y+".png");
+                    icono.getImage().flush();
+                    lavl.setIcon(icono);
+                    lavl.setHorizontalAlignment(JLabel.CENTER);
+                    lavl.setVerticalAlignment(JLabel.TOP);
+                    lavl.validate();
+                    lavl.revalidate();
+                    lavl.repaint();
+                    scrollimagen.validate();
+                    scrollimagen.revalidate();
+                    scrollimagen.repaint();
+                    frame.validate();
+                    frame.revalidate();
+                    frame.repaint();
+                    y++;
+                } else {
+                    timer.stop();
+                }                                       
+            }
+        }); 
+     
         this.numeros = numeros;
         this.arbol = new AVLTree();
         this.usuarioaux = usuarioaux;
         initComponents();
         LlenarArbol();
-        GraficarYSetear(this.arbol.root);
+        
+        if(this.arbol.root!=null){
+          GraficarYSetearArbol(this.arbol.root);
+        }else {
+          GraficarNull();
+        }
+        
+        velocidad = JSvelocidad.getValue();
         SetearBanco(this.numeros, TFdisponible);
-        this.setTitle("EDD Learning | INSERCIÓN AUTOMÁTICA - By Oscar Llamas");
+        this.setTitle("EDD Learning | ELIMINACIÓN AUTOMÁTICA - By Oscar Llamas");
         this.setLocationRelativeTo(null);
         this.validate();
         this.revalidate();
@@ -70,11 +112,12 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
         JSvelocidad.setForeground(new java.awt.Color(255, 255, 255));
         JSvelocidad.setMajorTickSpacing(1);
         JSvelocidad.setMaximum(10);
-        JSvelocidad.setMinimum(3);
+        JSvelocidad.setMinimum(2);
         JSvelocidad.setMinorTickSpacing(1);
         JSvelocidad.setPaintLabels(true);
         JSvelocidad.setPaintTicks(true);
-        JSvelocidad.setValue(3);
+        JSvelocidad.setToolTipText("");
+        JSvelocidad.setValue(2);
         JSvelocidad.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 JSvelocidadStateChanged(evt);
@@ -173,32 +216,47 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bsalirActionPerformed
 
-    public void GraficarYSetear(AVLTree.Node n){           
-            try { 
-            Graficar(n);
-            TimeUnit.SECONDS.sleep(velocidad);                      
+    public void GraficarYSetearArbol(AVLTree.Node n){           
+           File file = new File("C:/Reportes/salida.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph AVL{");
+            ps.println();
+            ps.println("node[shape=oval];");
+            ps.println();
+            global = "";
+            RecursiveALV(n);
+            ps.println(global);
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL.png";
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+                TimeUnit.MILLISECONDS.sleep(400);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(EliminacionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
             i.getImage().flush();
             this.lavl.setIcon(i);
-            this.lavl.setHorizontalAlignment(JLabel.CENTER);
-            this.lavl.setVerticalAlignment(JLabel.TOP);
+            lavl.setHorizontalAlignment(JLabel.CENTER);
+            lavl.setVerticalAlignment(JLabel.TOP);
             this.lavl.validate();
             this.lavl.revalidate();
-            this.lavl.repaint();
-            this.scrollimagen.setViewportView(this.lavl);
-            this.scrollimagen.validate();
-            this.scrollimagen.revalidate();
-            this.scrollimagen.repaint();
+            scrollimagen.setViewportView(this.lavl);
+            scrollimagen.revalidate();
+            txtExplicacion.setText("Árbol cargado totalmente lleno.");
             this.revalidate();
             this.validate();
-            this.repaint();
-             } catch (Exception e) {
+            this.repaint();    
+        } catch (Exception e) {
             
-            } 
-            
+        } 
     }
-    
- 
+     
     private void beliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beliminarActionPerformed
         if(!TFinsertar.getText().equals("")){
         if(this.arbol.root != null){
@@ -207,12 +265,13 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
             this.numeros = this.numeros.delete(this.numeros, aux);
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
+            x = 0;
+            y = 0;
             this.arbol.root = deleteNodeAuto(this.arbol.root, aux);
-            this.GraficarYSetear(this.arbol.root);
-            this.txtExplicacion.setText("Eliminamos "+aux+".");
-            this.validate();
-            this.revalidate();
-            this.repaint();                      
+            Graficar(this.arbol.root);
+            timer.setInitialDelay(0);
+            this.timer.start();
+            this.txtExplicacion.setText("Eliminamos "+aux+".");                  
         } else {
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
@@ -325,7 +384,10 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
             }
         }
 
- 
+        
+         Graficar(arbol.root);
+        
+        
         if (root == null)
             return root;
 
@@ -333,6 +395,8 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
 
         int balance = getBalance(root);
 
+        
+        Graficar(arbol.root);
 
         // IZQUIERDA IZQUIERDA
         if (balance > 1 && getBalance(root.izquierdo) >= 0)
@@ -404,7 +468,7 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL.png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-                TimeUnit.SECONDS.sleep(velocidad);
+                TimeUnit.MILLISECONDS.sleep(400);
             } catch (InterruptedException ex) {
                 Logger.getLogger(EliminacionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -415,10 +479,10 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
             this.lavl.revalidate();
             scrollimagen.setViewportView(this.lavl);
             scrollimagen.revalidate();
+            txtExplicacion.setText("El árbol está vacío, por lo tanto su cabeza es interpretada como null.");
             this.revalidate();
             this.validate();
-            this.repaint();
-            txtExplicacion.setText("El árbol está vacío, por lo tanto su cabeza es interpretada como null.");
+            this.repaint();           
         } catch (IOException ex) {
             
         }  
@@ -456,8 +520,14 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL"+x+".png";
             Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(400);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(InsercionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            x++;
         } catch (Exception e) {
             
         }     
@@ -479,8 +549,7 @@ public class EliminacionAutomatica extends javax.swing.JFrame {
           aux = aux.next;
       }
     }
-            
-        
+                
     public void SetearBanco(ListaSimple numeros, JTextField disponibles){
       ListaSimple.Node aux = numeros.head;
       boolean primero = true;    

@@ -62,6 +62,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         this.usuarioaux = usuarioaux;
         initComponents();
         GraficarNull();
+        velocidad = JSvelocidad.getValue();
         SetearBanco(this.numeros, TFdisponible);
         this.setTitle("EDD Learning | INSERCIÓN AUTOMÁTICA - By Oscar Llamas");
         this.setLocationRelativeTo(null);
@@ -103,11 +104,11 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         JSvelocidad.setForeground(new java.awt.Color(255, 255, 255));
         JSvelocidad.setMajorTickSpacing(1);
         JSvelocidad.setMaximum(10);
-        JSvelocidad.setMinimum(3);
+        JSvelocidad.setMinimum(2);
         JSvelocidad.setMinorTickSpacing(1);
         JSvelocidad.setPaintLabels(true);
         JSvelocidad.setPaintTicks(true);
-        JSvelocidad.setValue(3);
+        JSvelocidad.setValue(2);
         JSvelocidad.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 JSvelocidadStateChanged(evt);
