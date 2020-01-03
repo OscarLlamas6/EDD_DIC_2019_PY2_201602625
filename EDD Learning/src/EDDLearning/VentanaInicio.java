@@ -2,6 +2,7 @@ package EDDLearning;
 
 import static EDDLearning.Cargar.getHash;
 import static EDDLearning.Main.tablausuarios;
+import java.awt.event.KeyEvent;
 
 
 
@@ -83,6 +84,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         txtID.setBackground(new java.awt.Color(255, 255, 255));
         txtID.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtID.setForeground(new java.awt.Color(0, 0, 0));
+        txtID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIDKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 500, 220, 30));
 
         lHW.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 36)); // NOI18N
@@ -112,7 +118,8 @@ public class VentanaInicio extends javax.swing.JFrame {
                 PanelAdmin padmin = new PanelAdmin();
                 padmin.setVisible(true);
                 this.dispose();
-            } else if(UsuarioExiste(txtID.getText().replaceAll("-", ""), txtPass.getText())!=null){
+            } else if( isNumeric(txtID.getText().replaceAll("-", "")) && UsuarioExiste(txtID.getText().replaceAll("-", ""), txtPass.getText())!=null){
+                
                 PanelUsuario pusuario = new PanelUsuario(UsuarioExiste(txtID.getText().replaceAll("-", ""), txtPass.getText()));
                 pusuario.setVisible(true);
                 this.dispose();
@@ -127,6 +134,23 @@ public class VentanaInicio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bLoginActionPerformed
 
+    private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
+     
+    }//GEN-LAST:event_txtIDKeyTyped
+
+    public static boolean isNumeric(String str) {
+    if (str == null) {
+        return false;
+    }
+    int sz = str.length();
+    for (int i = 0; i < sz; i++) {
+        if (Character.isDigit(str.charAt(i)) == false) {
+            return false;
+        }
+    }
+    return true;
+}
+    
     public Usuario UsuarioExiste(String carnet, String pass){
         long clave = Long.parseLong(carnet);
         int direccion = (int)(clave%tablausuarios.size);

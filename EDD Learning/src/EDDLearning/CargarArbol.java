@@ -231,7 +231,16 @@ public class CargarArbol extends javax.swing.JFrame {
     }//GEN-LAST:event_bautoinsertActionPerformed
 
     private void bautodeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bautodeleteActionPerformed
-       
+        if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            EliminacionAutomatica ea = new EliminacionAutomatica(useraux, numeros);
+            ea.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }
     }//GEN-LAST:event_bautodeleteActionPerformed
 
     private void bmanualaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualaddActionPerformed

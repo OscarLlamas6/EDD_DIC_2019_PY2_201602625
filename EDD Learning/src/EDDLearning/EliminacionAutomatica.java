@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import EDDLearning.AVLTree.*;
 import javax.swing.SwingUtilities;
 
-public class InsercionAutomatica extends javax.swing.JFrame {
+public class EliminacionAutomatica extends javax.swing.JFrame {
 
     public Usuario usuarioaux;
     public AVLTree arbol;
@@ -22,12 +22,13 @@ public class InsercionAutomatica extends javax.swing.JFrame {
     public static int velocidad = 1;
     public static String global = "";
     
-    public InsercionAutomatica(Usuario usuarioaux, ListaSimple numeros) {
+    public EliminacionAutomatica(Usuario usuarioaux, ListaSimple numeros) {
         this.numeros = numeros;
         this.arbol = new AVLTree();
         this.usuarioaux = usuarioaux;
         initComponents();
-        GraficarNull();
+        LlenarArbol();
+        GraficarYSetear(this.arbol.root);
         SetearBanco(this.numeros, TFdisponible);
         this.setTitle("EDD Learning | INSERCIÓN AUTOMÁTICA - By Oscar Llamas");
         this.setLocationRelativeTo(null);
@@ -47,7 +48,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         lexplicacion = new javax.swing.JLabel();
         scrollexplicacion = new javax.swing.JScrollPane();
         txtExplicacion = new javax.swing.JTextArea();
-        binsertar = new javax.swing.JButton();
+        beliminar = new javax.swing.JButton();
         TFinsertar = new javax.swing.JTextField();
         ldisponibles = new javax.swing.JLabel();
         TFdisponible = new javax.swing.JTextField();
@@ -115,15 +116,15 @@ public class InsercionAutomatica extends javax.swing.JFrame {
 
         getContentPane().add(scrollexplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 390, 100));
 
-        binsertar.setBackground(new java.awt.Color(255, 255, 255));
-        binsertar.setForeground(new java.awt.Color(0, 0, 0));
-        binsertar.setText("INSERTAR");
-        binsertar.addActionListener(new java.awt.event.ActionListener() {
+        beliminar.setBackground(new java.awt.Color(255, 255, 255));
+        beliminar.setForeground(new java.awt.Color(0, 0, 0));
+        beliminar.setText("ELIMINAR");
+        beliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                binsertarActionPerformed(evt);
+                beliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(binsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 100, 40));
+        getContentPane().add(beliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 100, 40));
 
         TFinsertar.setBackground(new java.awt.Color(255, 255, 255));
         TFinsertar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -157,7 +158,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
 
         ltitutlo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         ltitutlo.setForeground(new java.awt.Color(255, 255, 255));
-        ltitutlo.setText("ÁRBOL AVL: INSERCIÓN");
+        ltitutlo.setText("ÁRBOL AVL: ELIMINACIÓN");
         getContentPane().add(ltitutlo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
@@ -179,6 +180,8 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
             i.getImage().flush();
             this.lavl.setIcon(i);
+            this.lavl.setHorizontalAlignment(JLabel.CENTER);
+            this.lavl.setVerticalAlignment(JLabel.TOP);
             this.lavl.validate();
             this.lavl.revalidate();
             this.lavl.repaint();
@@ -195,28 +198,33 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             
     }
     
-    private void binsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_binsertarActionPerformed
+ 
+    private void beliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beliminarActionPerformed
         if(!TFinsertar.getText().equals("")){
-            int aux = Integer.parseInt(TFinsertar.getText());       
+        if(this.arbol.root != null){
+                int aux = Integer.parseInt(TFinsertar.getText());       
         if(ExisteEnElBanco(aux)){           
             this.numeros = this.numeros.delete(this.numeros, aux);
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
-            this.arbol.root = insertAuto(this.arbol.root, aux);
+            this.arbol.root = deleteNodeAuto(this.arbol.root, aux);
             this.GraficarYSetear(this.arbol.root);
-            this.txtExplicacion.setText("Insertamos "+aux+".");
+            this.txtExplicacion.setText("Eliminamos "+aux+".");
             this.validate();
             this.revalidate();
-            this.repaint();
+            this.repaint();                      
         } else {
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
             this.txtExplicacion.setText("");
         }
+        }else {
+            GraficarNull();
+        }
         } else {
             this.txtExplicacion.setText("");
         }
-    }//GEN-LAST:event_binsertarActionPerformed
+    }//GEN-LAST:event_beliminarActionPerformed
 
     private void TFinsertarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TFinsertarKeyTyped
         char c = evt.getKeyChar();
@@ -281,6 +289,74 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         return node;
     }
            
+     public Node deleteNodeAuto(Node root, int dato) {
+
+        if (root == null)
+            return root;
+        if ( dato < root.dato )
+            root.izquierdo = deleteNodeAuto(root.izquierdo, dato);
+
+        else if( dato > root.dato )
+            root.derecho = deleteNodeAuto(root.derecho, dato);
+
+        else {
+
+            if( (root.izquierdo == null) || (root.derecho == null) ) {
+
+                Node temp;
+                if (root.izquierdo != null)
+                        temp = root.izquierdo;
+                else
+                    temp = root.derecho;
+
+                if(temp == null) {
+                    temp = root;
+                    root = null;
+                }
+                else 
+                    root = temp; 
+
+                temp = null;
+            }
+            else {
+                Node temp = minValueNode(root.derecho);
+                root.dato = temp.dato;
+                root.derecho = deleteNodeAuto(root.derecho, temp.dato);
+            }
+        }
+
+ 
+        if (root == null)
+            return root;
+
+        root.altura = Math.max(altura(root.izquierdo), altura(root.derecho)) + 1;
+
+        int balance = getBalance(root);
+
+
+        // IZQUIERDA IZQUIERDA
+        if (balance > 1 && getBalance(root.izquierdo) >= 0)
+            return derechoRotate(root);
+
+        // IZQUIERDA DERECHA
+        if (balance > 1 && getBalance(root.izquierdo) < 0) {
+            root.izquierdo =  izquierdoRotate(root.izquierdo);
+            return derechoRotate(root);
+        }
+
+        // DERECHA DERECHA
+        if (balance < -1 && getBalance(root.derecho) <= 0)
+            return izquierdoRotate(root);
+
+        // DERECHA IZQUIERDA
+        if (balance < -1 && getBalance(root.derecho) > 0) {
+            root.derecho = derechoRotate(root.derecho);
+            return izquierdoRotate(root);
+        }
+
+        return root;
+    }
+    
     public Node derechoRotate(Node y) {
         Node x = y.izquierdo;
         Node T2 = x.derecho;
@@ -330,7 +406,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             try {
                 TimeUnit.SECONDS.sleep(velocidad);
             } catch (InterruptedException ex) {
-                Logger.getLogger(InsercionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(EliminacionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
             }
             ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
             i.getImage().flush();
@@ -396,6 +472,15 @@ public class InsercionAutomatica extends javax.swing.JFrame {
       return false;
     }
     
+    public void LlenarArbol(){
+       ListaSimple.Node aux = numeros.head; 
+       while(aux!=null){         
+          this.arbol.root = insertAuto(this.arbol.root, aux.data);
+          aux = aux.next;
+      }
+    }
+            
+        
     public void SetearBanco(ListaSimple numeros, JTextField disponibles){
       ListaSimple.Node aux = numeros.head;
       boolean primero = true;    
@@ -417,7 +502,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
     private javax.swing.JSlider JSvelocidad;
     public javax.swing.JTextField TFdisponible;
     private javax.swing.JTextField TFinsertar;
-    private javax.swing.JButton binsertar;
+    private javax.swing.JButton beliminar;
     private javax.swing.JButton bsalir;
     private javax.swing.JLabel fondo;
     public javax.swing.JLabel lavl;

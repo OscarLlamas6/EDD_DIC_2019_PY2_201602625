@@ -3,6 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -51,11 +52,11 @@
         </Property>
         <Property name="majorTickSpacing" type="int" value="1"/>
         <Property name="maximum" type="int" value="10"/>
-        <Property name="minimum" type="int" value="1"/>
+        <Property name="minimum" type="int" value="3"/>
         <Property name="minorTickSpacing" type="int" value="1"/>
         <Property name="paintLabels" type="boolean" value="true"/>
         <Property name="paintTicks" type="boolean" value="true"/>
-        <Property name="value" type="int" value="1"/>
+        <Property name="value" type="int" value="3"/>
       </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="JSvelocidadStateChanged"/>
@@ -186,6 +187,7 @@
         </Property>
       </Properties>
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TFinsertarActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TFinsertarKeyTyped"/>
       </Events>
       <Constraints>
@@ -243,6 +245,13 @@
       </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lavl">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="ltitutlo">
       <Properties>
