@@ -12,17 +12,51 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import EDDLearning.AVLTree.*;
-import javax.swing.SwingUtilities;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class InsercionAutomatica extends javax.swing.JFrame {
 
+    public JFrame frame = this;
     public Usuario usuarioaux;
     public AVLTree arbol;
     public ListaSimple numeros;
     public static int velocidad = 1;
     public static String global = "";
+    public int x = 0;
+    public int y = 0;
+    Timer timer;
     
     public InsercionAutomatica(Usuario usuarioaux, ListaSimple numeros) {
+        
+        this.timer = new Timer((velocidad*1000), new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                if(y<x){
+                    ImageIcon icono = new ImageIcon("C:/Reportes/AVL"+y+".png");
+                    icono.getImage().flush();
+                    lavl.setIcon(icono);
+                    lavl.setHorizontalAlignment(JLabel.CENTER);
+                    lavl.setVerticalAlignment(JLabel.TOP);
+                    lavl.validate();
+                    lavl.revalidate();
+                    lavl.repaint();
+                    scrollimagen.validate();
+                    scrollimagen.revalidate();
+                    scrollimagen.repaint();
+                    frame.validate();
+                    frame.revalidate();
+                    frame.repaint();
+                    y++;
+                } else {
+                    timer.stop();
+                }                                       
+            }
+        });       
         this.numeros = numeros;
         this.arbol = new AVLTree();
         this.usuarioaux = usuarioaux;
@@ -171,30 +205,7 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         c.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bsalirActionPerformed
-
-    public void GraficarYSetear(AVLTree.Node n){           
-            try { 
-            Graficar(n);
-            TimeUnit.SECONDS.sleep(velocidad);                      
-            ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
-            i.getImage().flush();
-            this.lavl.setIcon(i);
-            this.lavl.validate();
-            this.lavl.revalidate();
-            this.lavl.repaint();
-            this.scrollimagen.setViewportView(this.lavl);
-            this.scrollimagen.validate();
-            this.scrollimagen.revalidate();
-            this.scrollimagen.repaint();
-            this.revalidate();
-            this.validate();
-            this.repaint();
-             } catch (Exception e) {
-            
-            } 
-            
-    }
-    
+  
     private void binsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_binsertarActionPerformed
         if(!TFinsertar.getText().equals("")){
             int aux = Integer.parseInt(TFinsertar.getText());       
@@ -202,12 +213,13 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             this.numeros = this.numeros.delete(this.numeros, aux);
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
+            x = 0;
+            y = 0;
             this.arbol.root = insertAuto(this.arbol.root, aux);
-            this.GraficarYSetear(this.arbol.root);
+            Graficar(this.arbol.root);
+            timer.setInitialDelay(0);
+            this.timer.start();           
             this.txtExplicacion.setText("Insertamos "+aux+".");
-            this.validate();
-            this.revalidate();
-            this.repaint();
         } else {
             this.TFinsertar.setText("");
             SetearBanco(this.numeros, this.TFdisponible);
@@ -250,11 +262,21 @@ public class InsercionAutomatica extends javax.swing.JFrame {
         } else{
             node.derecho = insertAuto(node.derecho, dato);           
         }
+        
+      
+          Graficar(arbol.root);  
+       
             
+        
         
         node.altura = Math.max(altura(node.izquierdo), altura(node.derecho)) + 1;
         int balance = getBalance(node);          
               
+      
+          Graficar(arbol.root);  
+     
+            
+        
         
         // IZQUIERDA IZQUIERDA
         if (balance > 1 && dato < node.izquierdo.dato)
@@ -335,8 +357,10 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             ImageIcon i = new ImageIcon("C:/Reportes/AVL.png");
             i.getImage().flush();
             this.lavl.setIcon(i);
+            this.lavl.setHorizontalAlignment(JLabel.CENTER);
+            this.lavl.setVerticalAlignment(JLabel.TOP);
             this.lavl.validate();
-            this.lavl.revalidate();
+            this.lavl.revalidate();          
             scrollimagen.setViewportView(this.lavl);
             scrollimagen.revalidate();
             this.revalidate();
@@ -380,8 +404,15 @@ public class InsercionAutomatica extends javax.swing.JFrame {
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/AVL"+x+".png";
             Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(400);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(InsercionAutomatica.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            x++;
+            
         } catch (Exception e) {
             
         }     
