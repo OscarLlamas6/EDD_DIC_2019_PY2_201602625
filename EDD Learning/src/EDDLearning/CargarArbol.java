@@ -31,6 +31,16 @@ public class CargarArbol extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lmanualpostorden = new javax.swing.JLabel();
+        bmanualpostorden = new javax.swing.JButton();
+        lmanualinorden = new javax.swing.JLabel();
+        bmanualinorden = new javax.swing.JButton();
+        lmanualpreorden = new javax.swing.JLabel();
+        bmanualpreorden = new javax.swing.JButton();
+        lautopostorden = new javax.swing.JLabel();
+        bautopostorden = new javax.swing.JButton();
+        lautoinorden = new javax.swing.JLabel();
+        bautoinorden = new javax.swing.JButton();
         bautopreorden = new javax.swing.JButton();
         lautopreorden = new javax.swing.JLabel();
         lautodelete = new javax.swing.JLabel();
@@ -52,6 +62,96 @@ public class CargarArbol extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lmanualpostorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lmanualpostorden.setForeground(new java.awt.Color(255, 255, 255));
+        lmanualpostorden.setText("POSTORDEN MANUAL");
+        getContentPane().add(lmanualpostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 550, 160, 30));
+
+        bmanualpostorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualpostorden1.png"))); // NOI18N
+        bmanualpostorden.setBorder(null);
+        bmanualpostorden.setBorderPainted(false);
+        bmanualpostorden.setContentAreaFilled(false);
+        bmanualpostorden.setFocusPainted(false);
+        bmanualpostorden.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualpostorden2.png"))); // NOI18N
+        bmanualpostorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmanualpostordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bmanualpostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 370, 150, 200));
+
+        lmanualinorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lmanualinorden.setForeground(new java.awt.Color(255, 255, 255));
+        lmanualinorden.setText("INORDEN MANUAL");
+        getContentPane().add(lmanualinorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 550, 140, 30));
+
+        bmanualinorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualinorden1.png"))); // NOI18N
+        bmanualinorden.setBorder(null);
+        bmanualinorden.setBorderPainted(false);
+        bmanualinorden.setContentAreaFilled(false);
+        bmanualinorden.setFocusPainted(false);
+        bmanualinorden.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualinorden2.png"))); // NOI18N
+        bmanualinorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmanualinordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bmanualinorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 370, 150, 200));
+
+        lmanualpreorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lmanualpreorden.setForeground(new java.awt.Color(255, 255, 255));
+        lmanualpreorden.setText("PREORDEN MANUAL");
+        getContentPane().add(lmanualpreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 550, 150, 30));
+
+        bmanualpreorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualpreorden1.png"))); // NOI18N
+        bmanualpreorden.setBorder(null);
+        bmanualpreorden.setBorderPainted(false);
+        bmanualpreorden.setContentAreaFilled(false);
+        bmanualpreorden.setFocusPainted(false);
+        bmanualpreorden.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualpreorden2.png"))); // NOI18N
+        bmanualpreorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmanualpreordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bmanualpreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, 150, 200));
+
+        lautopostorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lautopostorden.setForeground(new java.awt.Color(255, 255, 255));
+        lautopostorden.setText("POSTORDEN AUTOMÁTICO");
+        getContentPane().add(lautopostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 350, 190, 30));
+
+        bautopostorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autopostorden1.png"))); // NOI18N
+        bautopostorden.setBorder(null);
+        bautopostorden.setBorderPainted(false);
+        bautopostorden.setContentAreaFilled(false);
+        bautopostorden.setFocusPainted(false);
+        bautopostorden.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autopostorden2.png"))); // NOI18N
+        bautopostorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bautopostordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bautopostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 160, 150, 200));
+
+        lautoinorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lautoinorden.setForeground(new java.awt.Color(255, 255, 255));
+        lautoinorden.setText("INORDEN AUTOMÁTICO");
+        getContentPane().add(lautoinorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 180, 30));
+
+        bautoinorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autoinorden1.png"))); // NOI18N
+        bautoinorden.setBorder(null);
+        bautoinorden.setBorderPainted(false);
+        bautoinorden.setContentAreaFilled(false);
+        bautoinorden.setFocusPainted(false);
+        bautoinorden.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autoinorden2.png"))); // NOI18N
+        bautoinorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bautoinordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bautoinorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, 150, 200));
+
         bautopreorden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autopreorden1.png"))); // NOI18N
         bautopreorden.setBorder(null);
         bautopreorden.setBorderPainted(false);
@@ -63,22 +163,22 @@ public class CargarArbol extends javax.swing.JFrame {
                 bautopreordenActionPerformed(evt);
             }
         });
-        getContentPane().add(bautopreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 150, 200));
+        getContentPane().add(bautopreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, 150, 200));
 
         lautopreorden.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautopreorden.setForeground(new java.awt.Color(255, 255, 255));
         lautopreorden.setText("PREORDEN AUTOMÁTICO");
-        getContentPane().add(lautopreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 180, 30));
+        getContentPane().add(lautopreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 180, 30));
 
         lautodelete.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautodelete.setForeground(new java.awt.Color(255, 255, 255));
         lautodelete.setText("ELIMINACIÓN AUTOMÁTICA");
-        getContentPane().add(lautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 220, 30));
+        getContentPane().add(lautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 220, 30));
 
         lmanualdelete.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lmanualdelete.setForeground(new java.awt.Color(255, 255, 255));
         lmanualdelete.setText("ELIMINACIÓN MANUAL");
-        getContentPane().add(lmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 160, 30));
+        getContentPane().add(lmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 160, 30));
 
         lelegir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lelegir.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,7 +201,7 @@ public class CargarArbol extends javax.swing.JFrame {
                 bmanualdeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 150, 200));
+        getContentPane().add(bmanualdelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 370, 150, 200));
 
         lautoinsert.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautoinsert.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,7 +245,7 @@ public class CargarArbol extends javax.swing.JFrame {
                 bautodeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(bautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 150, 200));
+        getContentPane().add(bautodelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 150, 200));
 
         bautoinsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autoadd1.png"))); // NOI18N
         bautoinsert.setBorder(null);
@@ -298,32 +398,107 @@ public class CargarArbol extends javax.swing.JFrame {
             lnombrearchivo.setText("");
             patch = "";  
             permitir = false;
-            PreordenAutomatico pa = new PreordenAutomatico(useraux, numeros);
-            pa.setVisible(true);
+            RecorridoAutomatico ra = new RecorridoAutomatico(useraux, numeros, "PREORDEN");
+            ra.setVisible(true);
             this.dispose();                      
             } else {
                 JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
             }
     }//GEN-LAST:event_bautopreordenActionPerformed
+
+    private void bautoinordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bautoinordenActionPerformed
+        if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            RecorridoAutomatico ra = new RecorridoAutomatico(useraux, numeros, "INORDEN");
+            ra.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }
+    }//GEN-LAST:event_bautoinordenActionPerformed
+
+    private void bautopostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bautopostordenActionPerformed
+        if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            RecorridoAutomatico ra = new RecorridoAutomatico(useraux, numeros, "POSTORDEN");
+            ra.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }
+    }//GEN-LAST:event_bautopostordenActionPerformed
+
+    private void bmanualpreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualpreordenActionPerformed
+       if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            RecorridoManual rm = new RecorridoManual(useraux, numeros, "PREORDEN");
+            rm.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }
+    }//GEN-LAST:event_bmanualpreordenActionPerformed
+
+    private void bmanualinordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualinordenActionPerformed
+       if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            RecorridoManual rm = new RecorridoManual(useraux, numeros, "INORDEN");
+            rm.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }
+    }//GEN-LAST:event_bmanualinordenActionPerformed
+
+    private void bmanualpostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmanualpostordenActionPerformed
+     if(permitir){
+            lnombrearchivo.setText("");
+            patch = "";  
+            permitir = false;
+            RecorridoManual rm = new RecorridoManual(useraux, numeros, "POSTORDEN");
+            rm.setVisible(true);
+            this.dispose();                      
+            } else {
+                JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
+            }   
+    }//GEN-LAST:event_bmanualpostordenActionPerformed
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bautodelete;
+    private javax.swing.JButton bautoinorden;
     private javax.swing.JButton bautoinsert;
+    private javax.swing.JButton bautopostorden;
     private javax.swing.JButton bautopreorden;
     private javax.swing.JButton bbrowse;
     private javax.swing.JButton bmanualadd;
     private javax.swing.JButton bmanualdelete;
+    private javax.swing.JButton bmanualinorden;
+    private javax.swing.JButton bmanualpostorden;
+    private javax.swing.JButton bmanualpreorden;
     private javax.swing.JButton bsalir;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel lautodelete;
+    private javax.swing.JLabel lautoinorden;
     private javax.swing.JLabel lautoinsert;
+    private javax.swing.JLabel lautopostorden;
     private javax.swing.JLabel lautopreorden;
     private javax.swing.JLabel lelegir;
     private javax.swing.JLabel lgoback;
     private javax.swing.JLabel lloadtree;
     private javax.swing.JLabel lmanualdelete;
+    private javax.swing.JLabel lmanualinorden;
     private javax.swing.JLabel lmanualinsert;
+    private javax.swing.JLabel lmanualpostorden;
+    private javax.swing.JLabel lmanualpreorden;
     private javax.swing.JTextField lnombrearchivo;
     // End of variables declaration//GEN-END:variables
 }

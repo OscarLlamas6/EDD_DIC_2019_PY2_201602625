@@ -287,6 +287,9 @@ public class EliminacionManual extends javax.swing.JFrame {
             frame.revalidate();
             frame.repaint();
             y++;
+            if(y>=x){
+              bsiguiente.setEnabled(false);  
+            } 
         } else {
             bsiguiente.setEnabled(false);
         }

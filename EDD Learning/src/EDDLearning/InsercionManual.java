@@ -227,6 +227,9 @@ public class InsercionManual extends javax.swing.JFrame {
                     frame.revalidate();
                     frame.repaint();
                     y++;
+                    if(y>=x){
+                      bsiguiente.setEnabled(false);  
+                    } 
                 } else {
                     bsiguiente.setEnabled(false);
                 }   
