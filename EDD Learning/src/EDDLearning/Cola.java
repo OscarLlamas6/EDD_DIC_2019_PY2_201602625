@@ -1,6 +1,11 @@
 
 package EDDLearning;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.concurrent.TimeUnit;
+
 public class Cola {
    
    
@@ -13,7 +18,7 @@ public class Cola {
             this.dato = dato;
             this.next = null; 
         }                 
-        public String getDato() { return dato; }
+        public String getDato() { return this.dato; }
         public void setDato(String dato) { this.dato = dato; }
         public Node getNext() { return next; }
         public void setNext(Node next) { this.next = next; }
@@ -53,6 +58,47 @@ public class Cola {
             setFrente(getFrente().getNext());
             setSize(getSize() - 1);
         }
+    }
+    
+    public void Graficar(int x){
+       File file = new File("C:/Reportes/salida2.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph Cola{");
+            ps.println();
+            ps.println("node[shape=record];");   
+            ps.println();
+            boolean primero = true;
+            String cola = "Cola[label=\"";
+            Node aux = this.getFrente();
+            while(aux != null){
+                if(primero){
+                    primero = false;
+                    cola+=" "+aux.getDato()+" ";
+                } else {
+                   cola+="| "+aux.getDato()+" "; 
+                }              
+                aux = aux.getNext();
+            }
+            cola+="\"];";
+            ps.println(cola);
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida2.dot -o C:/Reportes/Cola"+x+".png";
+            Process p = Runtime.getRuntime().exec(command);
+            command = "Salida.png";
+            p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+        } catch (IOException ex) {
+            
+        }     
     }
     
     public Node getFrente() { return this.frente;}

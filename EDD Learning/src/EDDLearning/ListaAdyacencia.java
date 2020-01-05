@@ -13,7 +13,7 @@ public class ListaAdyacencia {
        private String data; 
        private NodoAdyacencia next; 
   
-        NodoAdyacencia(String d) 
+      public  NodoAdyacencia(String d) 
         { 
             this.data = d; 
             this.next = null; 
@@ -25,6 +25,11 @@ public class ListaAdyacencia {
         public void setNext(NodoAdyacencia next) { this.next = next; }
     } 
   
+    
+    public ListaAdyacencia(){
+        this.head = null;
+    }
+    
     public ListaAdyacencia insert(ListaAdyacencia list, String data) 
     { 
 

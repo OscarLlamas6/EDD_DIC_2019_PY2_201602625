@@ -13,7 +13,7 @@ public class ListaVertices {
         private Vertice vertice; 
         private NodoVertice next; 
   
-        NodoVertice(Vertice vertice) 
+     public NodoVertice(Vertice vertice) 
         { 
             this.vertice = vertice; 
             this.next = null; 
@@ -25,6 +25,10 @@ public class ListaVertices {
         public void setNext(NodoVertice next) { this.next = next; }
     } 
   
+    public ListaVertices(){
+        this.head = null;
+    }
+            
     public ListaVertices insert(ListaVertices list, Vertice vertice) 
     { 
 
@@ -49,7 +53,7 @@ public class ListaVertices {
     public NodoVertice ObtenerVertice(String dato){
         NodoVertice aux = this.getHead();
         while(aux!=null){
-          if(aux.getVertice().getDato()==dato){
+          if(aux.getVertice().getDato().equals(dato)){
               return aux;
           }
           aux = aux.getNext();

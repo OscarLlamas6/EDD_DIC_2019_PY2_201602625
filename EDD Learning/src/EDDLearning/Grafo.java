@@ -13,11 +13,13 @@ public class Grafo
     private int V;   // No. of vertices 
     private ListaVertices vertices; //Lista de vertices
     public static int x = 0;
+    public ListaAdyacencia visitadosanchura;
 
-    Grafo(int v) 
+   public Grafo(int v) 
     { 
         this.V = v; 
         this.vertices = new ListaVertices();
+        this.visitadosanchura = new ListaAdyacencia();
     } 
     
     public void AgregarVertice(String s){
@@ -39,10 +41,13 @@ public class Grafo
         AgregarVisitado(VerticesVisitados, s);
         cola.enqueue(s);
         while(cola.getSize()!=0){
+            cola.Graficar(this.x);
             s = cola.getFrente().getDato();
             cola.dequeue();
+            GraficarGrafoAnchura(s);
+            this.visitadosanchura = this.visitadosanchura.insert(this.visitadosanchura, s);
             System.out.print(s+" ");
-            ListaAdyacencia.NodoAdyacencia aux = vertices.ObtenerVertice(s).getVertice().getListaAdyacencia().getHead();
+            ListaAdyacencia.NodoAdyacencia aux = this.vertices.ObtenerVertice(s).getVertice().getListaAdyacencia().getHead();
             while(aux!=null){
                 if(!VerticeVisitado(VerticesVisitados, aux.getData())){
                     AgregarVisitado(VerticesVisitados, aux.getData());
@@ -51,6 +56,8 @@ public class Grafo
                 aux = aux.getNext();
             }
         }
+        cola.Graficar(this.x);
+        GraficarGrafoAnchura("");
     }
     
     public void ProfundidadRecursion(String s, ListaAdyacencia lista){
@@ -79,6 +86,15 @@ public class Grafo
         return false;
     }
     
+    public boolean VisitadoEnAnchura(String s){
+        ListaAdyacencia.NodoAdyacencia aux = this.visitadosanchura.getHead();
+        while(aux!=null){
+            if(aux.getData().equals(s)){ return true; }
+            aux = aux.getNext();
+        }
+        return false;
+    }
+        
     public void AgregarVisitado(ListaAdyacencia lista, String s){
         lista = lista.insert(lista, s);
     }
@@ -142,13 +158,65 @@ public class Grafo
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/GrafoFinal.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo.png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(300);
+            TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
           
         }
+        } catch (IOException ex) {
+            
+        }     
+    }
+    
+    public void GraficarGrafoAnchura(String dato) {
+       ListaAdyacencia pares_graficados = new ListaAdyacencia();
+       File file = new File("C:/Reportes/salida.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph Grafo{");
+            ps.println();
+            ps.println("node[shape=circle];");
+            ps.println("rankdir=LR;");
+            NodoVertice v = vertices.getHead();
+            while(v != null){
+                if(v.getVertice().getDato().equals(dato)){
+                 ps.println(v.getVertice().getDato()+"[style = filled, fillcolor = green];");    
+                } else if(VisitadoEnAnchura(v.getVertice().getDato())){
+                  ps.println(v.getVertice().getDato()+"[style = filled, fillcolor = gold];");  
+                } else {
+                 ps.println(v.getVertice().getDato()+";");   
+                }               
+                v = v.getNext();
+            }
+            ps.println();                                  
+            ListaVertices.NodoVertice aux = this.vertices.getHead();
+            while(aux!=null){
+            ListaAdyacencia.NodoAdyacencia ad = aux.getVertice().getListaAdyacencia().getHead();
+            while(ad!=null){
+                if(!ParGraficado(pares_graficados, aux.getVertice().getDato(), ad.getData())){
+                    AgregarGraficado(pares_graficados, aux.getVertice().getDato(), ad.getData());
+                    ps.println(aux.getVertice().getDato()+"->"+ad.getData()+"[dir=none];");
+                }
+                ad = ad.getNext();
+            }
+            System.out.println("");
+            aux = aux.getNext();
+            }                                                          
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+            this.x++;
         } catch (IOException ex) {
             
         }     
