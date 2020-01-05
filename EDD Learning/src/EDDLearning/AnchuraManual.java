@@ -206,7 +206,7 @@ public class AnchuraManual extends javax.swing.JFrame {
         try {
         String primer_nodo = "";
         JSONArray jsonArray = (JSONArray) jSONObject.get("Graph");
-        this.x = jsonArray.size();
+        this.x = (jsonArray.size()*2);
         grafo = new Grafo(jsonArray.size());
         grafo.x = 0;
         for(Object Obj: jsonArray){

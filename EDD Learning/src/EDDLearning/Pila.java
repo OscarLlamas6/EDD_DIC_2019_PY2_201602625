@@ -1,4 +1,3 @@
-
 package EDDLearning;
 
 import java.io.File;
@@ -6,10 +5,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
 
-public class Cola {
-   
-   
-   public static class Node{ 
+
+public class Pila {
+        
+    public static class Node{ 
   
        private String dato; 
        private Node next;  
@@ -18,21 +17,14 @@ public class Cola {
             this.dato = dato;
             this.next = null; 
         }                 
-        public String getDato() { return this.dato; }
+        public String getDato() { return dato; }
         public void setDato(String dato) { this.dato = dato; }
         public Node getNext() { return next; }
         public void setNext(Node next) { this.next = next; }
     } 
     
-    private Node frente;
-    private Node fin;
+    private Node cima;
     private int size;
-        
-    public Cola(){
-        this.frente = null;
-        this.fin = null;
-        this.size = 0;
-    }
     
     public boolean EstaVacia(){
         if(getSize()==0){
@@ -42,54 +34,55 @@ public class Cola {
         }
     } 
     
-    public void enqueue(String dato){
+    public void push(String dato){
         Node n = new Node(dato);
         if(EstaVacia()){
-            this.setFrente(n);
+            this.cima = n;
+            this.size++;
         }else {
-            this.getFin().setNext(n);
+            n.setNext(this.cima);
+            this.cima = n;
+            this.size++;
         }
-        this.setFin(n);
-        this.setSize(this.getSize() + 1);
     }
     
-    public void dequeue(){
+    public void pop(){
         if(!EstaVacia()){
-            setFrente(getFrente().getNext());
-            setSize(getSize() - 1);
+            this.cima = this.cima.getNext();
+            this.size--;                   
         }
     }
     
     public void Graficar(int x){
-       File file = new File("C:/Reportes/salida2.dot");
+       File file = new File("C:/Reportes/salida3.dot");
        if (file.exists()){ file.delete();}
         try {
             file.createNewFile();
             PrintStream ps = new PrintStream(file);
-            ps.println("digraph Cola{");
+            ps.println("digraph Pila{");
             ps.println();
             ps.println("node[shape=record];");   
+            ps.println("rankdir=LR;");  
             ps.println();
             boolean primero = true;
-            String cola = "Cola[label=\"";
-            Node aux = this.getFrente();
+            String pila = "Pila[label=\"";
+            Pila.Node aux = this.getCima();
             while(aux != null){
                 if(primero){
                     primero = false;
-                    cola+=" "+aux.getDato()+" ";
+                    pila+=" "+aux.getDato()+" ";
                 } else {
-                   cola+="| "+aux.getDato()+" "; 
+                   pila+="| "+aux.getDato()+" "; 
                 }              
                 aux = aux.getNext();
             }
-            cola+="\"];";
-            ps.println(cola);
+            pila+="\"];";
+            ps.println(pila);
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng C:/Reportes/salida2.dot -o C:/Reportes/Cola"+x+".png";
+            String command = "dot.exe -Tpng C:/Reportes/salida3.dot -o C:/Reportes/Pila"+x+".png";
             Process p = Runtime.getRuntime().exec(command);
-            p = Runtime.getRuntime().exec(command);
             try {
             TimeUnit.MILLISECONDS.sleep(200);
         } catch (InterruptedException ex) {
@@ -100,12 +93,9 @@ public class Cola {
         }     
     }
     
-    public Node getFrente() { return this.frente;}
-    public void setFrente(Node frente) { this.frente = frente; }
-    public Node getFin() { return this.fin;}
-    public void setFin(Node fin) { this.fin = fin; }
-    public int getSize() { return this.size;  }
+    public Node getCima() { return this.cima; }
+    public void setCima(Node cima) {this.cima = cima; }
+    public int getSize() { return this.size; }
     public void setSize(int size) { this.size = size; }
-       
     
 }

@@ -283,7 +283,9 @@ public class CargarGrafo extends javax.swing.JFrame {
             lnombrearchivo.setText("");
             patch = "";
             permitir = false;
-            
+            ProfundidadAutomatico pa = new ProfundidadAutomatico(useraux, jSONObject);
+            pa.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
         }

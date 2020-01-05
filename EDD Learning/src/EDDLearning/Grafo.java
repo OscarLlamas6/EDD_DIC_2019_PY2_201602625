@@ -14,12 +14,14 @@ public class Grafo
     private ListaVertices vertices; //Lista de vertices
     public static int x = 0;
     public ListaAdyacencia visitadosanchura;
+    public ListaAdyacencia visitadosprofunidad;
 
    public Grafo(int v) 
     { 
         this.V = v; 
         this.vertices = new ListaVertices();
         this.visitadosanchura = new ListaAdyacencia();
+        this.visitadosprofunidad = new ListaAdyacencia();
     } 
     
     public void AgregarVertice(String s){
@@ -40,10 +42,12 @@ public class Grafo
         Cola cola = new Cola();
         AgregarVisitado(VerticesVisitados, s);
         cola.enqueue(s);
-        while(cola.getSize()!=0){
-            cola.Graficar(this.x);
+        cola.Graficar(this.x);
+            GraficarGrafoAnchura(s);
+        while(cola.getSize()!=0){            
             s = cola.getFrente().getDato();
             cola.dequeue();
+            cola.Graficar(this.x);
             GraficarGrafoAnchura(s);
             this.visitadosanchura = this.visitadosanchura.insert(this.visitadosanchura, s);
             System.out.print(s+" ");
@@ -52,6 +56,8 @@ public class Grafo
                 if(!VerticeVisitado(VerticesVisitados, aux.getData())){
                     AgregarVisitado(VerticesVisitados, aux.getData());
                     cola.enqueue(aux.getData());
+                    cola.Graficar(this.x);
+                    GraficarGrafoAnchura(s);
                 }
                 aux = aux.getNext();
             }
@@ -77,6 +83,37 @@ public class Grafo
         ProfundidadRecursion(s, VerticesVisitados);
     }
     
+    public void RecorridoProfundidadStackRecursion(ListaAdyacencia VerticesVisitados, Pila pila){           
+      String s = pila.getCima().getDato();
+      System.out.print(s+" ");
+      this.visitadosprofunidad = this.visitadosprofunidad.insert(this.visitadosprofunidad, s);
+      AgregarVisitado(VerticesVisitados, s);
+      ListaAdyacencia.NodoAdyacencia aux = vertices.ObtenerVertice(s).getVertice().getListaAdyacencia().getHead();
+      while(aux!=null){
+          if(!VerticeVisitado(VerticesVisitados, aux.getData())){
+                    pila.push(aux.getData());
+                    pila.Graficar(this.x);
+                    GraficarGrafoProfundidad(s);
+                    RecorridoProfundidadStackRecursion(VerticesVisitados, pila);
+                }
+          aux = aux.getNext();
+      }
+      pila.pop();
+      pila.Graficar(this.x);
+      GraficarGrafoProfundidad(s);
+  } 
+    
+    public void RecorridoProfundidadStack(String s){
+       ListaAdyacencia VerticesVisitados = new ListaAdyacencia();
+       Pila pila = new Pila();
+       pila.push(s);
+       pila.Graficar(this.x);
+       GraficarGrafoProfundidad(s);
+       RecorridoProfundidadStackRecursion(VerticesVisitados, pila);
+       pila.Graficar(this.x);
+       GraficarGrafoProfundidad("");
+    } 
+    
     public boolean VerticeVisitado(ListaAdyacencia lista, String s){
         ListaAdyacencia.NodoAdyacencia aux = lista.getHead();
         while(aux!=null){
@@ -88,6 +125,15 @@ public class Grafo
     
     public boolean VisitadoEnAnchura(String s){
         ListaAdyacencia.NodoAdyacencia aux = this.visitadosanchura.getHead();
+        while(aux!=null){
+            if(aux.getData().equals(s)){ return true; }
+            aux = aux.getNext();
+        }
+        return false;
+    }
+    
+    public boolean VisitadoEnProfundidad(String s){
+        ListaAdyacencia.NodoAdyacencia aux = this.visitadosprofunidad.getHead();
         while(aux!=null){
             if(aux.getData().equals(s)){ return true; }
             aux = aux.getNext();
@@ -222,6 +268,58 @@ public class Grafo
         }     
     }
   
+    public void GraficarGrafoProfundidad(String dato) {
+       ListaAdyacencia pares_graficados = new ListaAdyacencia();
+       File file = new File("C:/Reportes/salida.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph Grafo{");
+            ps.println();
+            ps.println("node[shape=circle];");
+            ps.println("rankdir=LR;");
+            NodoVertice v = vertices.getHead();
+            while(v != null){
+                if(v.getVertice().getDato().equals(dato)){
+                 ps.println(v.getVertice().getDato()+"[style = filled, fillcolor = green];");    
+                } else if(VisitadoEnProfundidad(v.getVertice().getDato())){
+                  ps.println(v.getVertice().getDato()+"[style = filled, fillcolor = gold];");  
+                } else {
+                 ps.println(v.getVertice().getDato()+";");   
+                }               
+                v = v.getNext();
+            }
+            ps.println();                                  
+            ListaVertices.NodoVertice aux = this.vertices.getHead();
+            while(aux!=null){
+            ListaAdyacencia.NodoAdyacencia ad = aux.getVertice().getListaAdyacencia().getHead();
+            while(ad!=null){
+                if(!ParGraficado(pares_graficados, aux.getVertice().getDato(), ad.getData())){
+                    AgregarGraficado(pares_graficados, aux.getVertice().getDato(), ad.getData());
+                    ps.println(aux.getVertice().getDato()+"->"+ad.getData()+"[dir=none];");
+                }
+                ad = ad.getNext();
+            }
+            System.out.println("");
+            aux = aux.getNext();
+            }                                                          
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+            this.x++;
+        } catch (IOException ex) {
+            
+        }     
+    }
+    
     public void AgregarGraficado(ListaAdyacencia lista, String v1, String v2){
         String par = v1+"-"+v2;
         lista = lista.insert(lista, par);

@@ -10,7 +10,7 @@ import javax.swing.Timer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class AnchuraAutomatico extends javax.swing.JFrame {
+public class ProfundidadAutomatico extends javax.swing.JFrame {
 
     public ListaAdyacencia.NodoAdyacencia visitado;
     public JSONObject ObjGrafo;
@@ -23,7 +23,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
     Timer timer;
     boolean primero = true;
     
-    public AnchuraAutomatico(Usuario usuarioaux, JSONObject ObjGrafo) {
+    public ProfundidadAutomatico(Usuario usuarioaux, JSONObject ObjGrafo) {
         this.visitado = null;
         this.ObjGrafo = ObjGrafo;
         this.usuarioaux = usuarioaux;
@@ -35,7 +35,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
                 bplay.setEnabled(false);
                 if(y<x+1){                  
                     ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
-                    ImageIcon icono2 = new ImageIcon("C:/Reportes/Cola"+y+".png");
+                    ImageIcon icono2 = new ImageIcon("C:/Reportes/Pila"+y+".png");
                     icono.getImage().flush();
                     icono2.getImage().flush();                  
                     lgrafo.setIcon(icono);
@@ -73,7 +73,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         initComponents();
         SetearGrafoFinal(this.grafo, this.ObjGrafo);
         velocidad = JSvelocidad.getValue();
-        this.setTitle("EDD Learning | RECORRIDO EN ANCHURA - By Oscar Llamas");
+        this.setTitle("EDD Learning | RECORRIDO EN PROFUNDIDAD - By Oscar Llamas");
         this.setLocationRelativeTo(null);
         this.validate();
         this.revalidate();
@@ -96,9 +96,11 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         scrollimagen = new javax.swing.JScrollPane();
         lgrafo = new javax.swing.JLabel();
         ltitutlo = new javax.swing.JLabel();
-        fondo = new javax.swing.JLabel();
+        lfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(820, 640));
+        setPreferredSize(new java.awt.Dimension(800, 640));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -110,12 +112,12 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         txtRecorrido.setRows(5);
         txtRecorrido.setWrapStyleWord(true);
         txtRecorrido.setFocusable(false);
-        getContentPane().add(txtRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 330, 60));
+        getContentPane().add(txtRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, 330, 60));
 
         lrecorrido.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lrecorrido.setForeground(new java.awt.Color(255, 255, 255));
         lrecorrido.setText("Recorrido:");
-        getContentPane().add(lrecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, -1, -1));
+        getContentPane().add(lrecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, -1, -1));
 
         JSvelocidad.setBackground(new java.awt.Color(0, 0, 0));
         JSvelocidad.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,38 +133,38 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
                 JSvelocidadStateChanged(evt);
             }
         });
-        getContentPane().add(JSvelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 540, -1, -1));
+        getContentPane().add(JSvelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, -1, -1));
 
         scrolleddaux.setViewportView(leddaux);
 
-        getContentPane().add(scrolleddaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 640, 90));
+        getContentPane().add(scrolleddaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 150, 340));
 
-        bplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/startp1.png"))); // NOI18N
+        bplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/start1.png"))); // NOI18N
         bplay.setBorder(null);
         bplay.setBorderPainted(false);
         bplay.setContentAreaFilled(false);
         bplay.setFocusPainted(false);
-        bplay.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/startp2.png"))); // NOI18N
+        bplay.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/start2.png"))); // NOI18N
         bplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bplayActionPerformed(evt);
             }
         });
-        getContentPane().add(bplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 580, 50, 50));
+        getContentPane().add(bplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 450, 90, 90));
 
         liniciar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         liniciar.setForeground(new java.awt.Color(255, 255, 255));
         liniciar.setText("INICIAR");
-        getContentPane().add(liniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 640, -1, -1));
+        getContentPane().add(liniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, -1, -1));
 
         lvelocidad.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lvelocidad.setForeground(new java.awt.Color(255, 255, 255));
         lvelocidad.setText("Velocidad:");
-        getContentPane().add(lvelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, -1));
+        getContentPane().add(lvelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, -1));
 
         lgoback.setForeground(new java.awt.Color(255, 255, 255));
         lgoback.setText("REGRESAR");
-        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 640, 70, 30));
+        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 590, 70, 30));
 
         bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);
@@ -175,21 +177,21 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
                 bsalirActionPerformed(evt);
             }
         });
-        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 580, 50, 50));
+        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 540, 50, 50));
 
         scrollimagen.setViewportView(lgrafo);
 
-        getContentPane().add(scrollimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 640, 340));
+        getContentPane().add(scrollimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 570, 340));
 
         ltitutlo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         ltitutlo.setForeground(new java.awt.Color(255, 255, 255));
-        ltitutlo.setText("Grafos: Recorrido en anchura");
+        ltitutlo.setText("Grafos: Recorrido en profundidad");
         getContentPane().add(ltitutlo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/graph-wallpaper.jpg"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 720));
+        lfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/profundidad-wallpaper.jpg"))); // NOI18N
+        getContentPane().add(lfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 640));
 
-        pack();
+        setBounds(0, 0, 823, 665);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsalirActionPerformed
@@ -206,13 +208,12 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         this.y = 0;
         this.txtRecorrido.setText("");
         this.primero = true;
-        this.visitado = this.grafo.visitadosanchura.getHead();
+        this.visitado = this.grafo.visitadosprofunidad.getHead();
         this.timer.setInitialDelay(0);
         this.timer.setDelay(velocidad*1000);
         this.timer.start();   
     }//GEN-LAST:event_bplayActionPerformed
-  
-    
+      
     public void SetearGrafoFinal(Grafo grafo, JSONObject jSONObject){    
         try {
         String primer_nodo = "";
@@ -239,7 +240,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         this.grafo = grafo;
         if(this.grafo.getVertices().getHead() != null){
             primer_nodo = String.valueOf(this.grafo.getVertices().getHead().getVertice().getDato());
-            this.grafo.RecorridoAnchura(primer_nodo);
+            this.grafo.RecorridoProfundidadStack(primer_nodo);
         }
         
         this.grafo.GraficarGrafo("");
@@ -262,8 +263,8 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
     private javax.swing.JSlider JSvelocidad;
     private javax.swing.JButton bplay;
     private javax.swing.JButton bsalir;
-    private javax.swing.JLabel fondo;
     public javax.swing.JLabel leddaux;
+    private javax.swing.JLabel lfondo;
     private javax.swing.JLabel lgoback;
     public javax.swing.JLabel lgrafo;
     private javax.swing.JLabel liniciar;
