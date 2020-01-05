@@ -235,13 +235,7 @@ public class CargarGrafo extends javax.swing.JFrame {
             JSONParser parser = new JSONParser();                                 
             FileReader reader = new FileReader(file.getAbsolutePath());
             Object obj = parser.parse(reader); 
-            this.jSONObject = (JSONObject)obj;                      
-           /* JSONArray jsonArray = (JSONArray) jSONObject.get("Graph");
-            for(Object Obj: jsonArray){
-                JSONObject o = (JSONObject) Obj;
-                String s = String.valueOf(o.get("Node"));
-                System.out.println(s);
-            }   */            
+            this.jSONObject = (JSONObject)obj;                                  
             }
             catch (Exception e) {
             }
@@ -320,7 +314,9 @@ public class CargarGrafo extends javax.swing.JFrame {
             lnombrearchivo.setText("");
             patch = "";
             permitir = false;
-            
+            MatrizManual mm = new MatrizManual(useraux, jSONObject);
+            mm.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
         }

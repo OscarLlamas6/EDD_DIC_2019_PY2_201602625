@@ -211,11 +211,13 @@ public class RecorridoManual extends javax.swing.JFrame {
         }else if(this.recorrido.equals("POSTORDEN")){
             postOrder(arbol.root);   
         }  
+        bplay.setEnabled(false);
         bnext.setEnabled(true);
     }//GEN-LAST:event_bplayActionPerformed
 
     private void bnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnextActionPerformed
         if(y<x){
+                    bplay.setEnabled(false);
                     ImageIcon icono = new ImageIcon("C:/Reportes/AVL"+y+".png");
                     icono.getImage().flush();
                     lavl.setIcon(icono);
@@ -232,10 +234,12 @@ public class RecorridoManual extends javax.swing.JFrame {
                     frame.repaint();
                     y++;                   
                     if(y>=x){
-                      bnext.setEnabled(false);  
+                      bnext.setEnabled(false); 
+                      bplay.setEnabled(true);
                     }                                       
                 } else {
-                    
+                    bnext.setEnabled(false);
+                    bplay.setEnabled(true);
                 }  
     }//GEN-LAST:event_bnextActionPerformed
 
