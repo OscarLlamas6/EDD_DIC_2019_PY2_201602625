@@ -4,12 +4,15 @@ import EDDLearning.ListaVertices.NodoVertice;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.concurrent.TimeUnit;
 
 
-class Grafo 
+
+public class Grafo 
 { 
     private int V;   // No. of vertices 
     private ListaVertices vertices; //Lista de vertices
+    public static int x = 0;
 
     Grafo(int v) 
     { 
@@ -103,8 +106,8 @@ class Grafo
     }
     
     public void GraficarGrafo(String dato) {
-        ListaAdyacencia pares_graficados = new ListaAdyacencia();
-       File file = new File("salida.dot");
+       ListaAdyacencia pares_graficados = new ListaAdyacencia();
+       File file = new File("C:/Reportes/salida.dot");
        if (file.exists()){ file.delete();}
         try {
             file.createNewFile();
@@ -139,10 +142,13 @@ class Grafo
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng salida.dot -o Salida.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/GrafoFinal.png";
             Process p = Runtime.getRuntime().exec(command);
-            command = "Salida.png";
-            p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(300);
+        } catch (InterruptedException ex) {
+          
+        }
         } catch (IOException ex) {
             
         }     
@@ -165,7 +171,7 @@ class Grafo
     }
     
     public void GraficarListaDeAdyacencia(){
-       File file = new File("salida.dot");
+       File file = new File("C:/Reportes/salida.dot");
        if (file.exists()){ file.delete();}
         try {
             file.createNewFile();
@@ -227,17 +233,21 @@ class Grafo
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng salida.dot -o Salida.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
-            command = "Salida.png";
-            p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+          this.x++;
         } catch (IOException ex) {
             
         }    
     }
     
     public void GraficarMatrizDeAdyacencia(){
-         File file = new File("salida.dot");
+       File file = new File("C:/Reportes/salida.dot");
        if (file.exists()){ file.delete();}
         try {
             file.createNewFile();
@@ -333,10 +343,14 @@ class Grafo
             ps.println();
             ps.print("}");
             ps.close();
-            String command = "dot.exe -Tpng salida.dot -o Salida.png";
+            String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
-            command = "Salida.png";
-            p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+          this.x++;
         } catch (IOException ex) {
             
         }    

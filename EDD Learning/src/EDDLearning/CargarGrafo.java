@@ -17,6 +17,7 @@ public class CargarGrafo extends javax.swing.JFrame {
     public Boolean permitir = false;
     public String patch="";
     public Usuario useraux;
+    public JSONObject jSONObject = null;
     
     public CargarGrafo(Usuario useraux) {
         this.useraux = useraux;
@@ -55,8 +56,8 @@ public class CargarGrafo extends javax.swing.JFrame {
 
         lmanualDFT.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lmanualDFT.setForeground(new java.awt.Color(255, 255, 255));
-        lmanualDFT.setText("RECORRIDO EN ANCHURA MANUAL");
-        getContentPane().add(lmanualDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 580, 250, 30));
+        lmanualDFT.setText("RECORRIDO EN PROFUNDIDAD MANUAL");
+        getContentPane().add(lmanualDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 580, 280, 30));
 
         bmanualDFT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualDFT1.png"))); // NOI18N
         bmanualDFT.setBorder(null);
@@ -69,7 +70,7 @@ public class CargarGrafo extends javax.swing.JFrame {
                 bmanualDFTActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 370, 150, 200));
+        getContentPane().add(bmanualDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 380, 150, 200));
 
         bautoDFT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/autoDFT1.png"))); // NOI18N
         bautoDFT.setBorder(null);
@@ -86,18 +87,18 @@ public class CargarGrafo extends javax.swing.JFrame {
 
         lautoDFT.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautoDFT.setForeground(new java.awt.Color(255, 255, 255));
-        lautoDFT.setText("RECORRIDO EN ANCHURA AUTOMÁTICO");
-        getContentPane().add(lautoDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 350, 280, 30));
+        lautoDFT.setText("RECORRIDO EN PROFUNDIDAD AUTOMÁTICO");
+        getContentPane().add(lautoDFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 360, 320, 30));
 
         lautoBFT.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautoBFT.setForeground(new java.awt.Color(255, 255, 255));
-        lautoBFT.setText("RECORRIDO EN PROFUNDIDAD AUTOMÁTICO");
-        getContentPane().add(lautoBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 320, 30));
+        lautoBFT.setText("RECORRIDO EN ANCHURA AUTOMÁTICO");
+        getContentPane().add(lautoBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, 280, 30));
 
         lmanualBFT.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lmanualBFT.setForeground(new java.awt.Color(255, 255, 255));
-        lmanualBFT.setText("RECORRIDO EN PROFUNDIDAD MANUAL");
-        getContentPane().add(lmanualBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 580, 290, 30));
+        lmanualBFT.setText("RECORRIDO EN ANCHURA MANUAL");
+        getContentPane().add(lmanualBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 580, 250, 30));
 
         lelegir.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lelegir.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,12 +121,12 @@ public class CargarGrafo extends javax.swing.JFrame {
                 bmanualBFTActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 150, 200));
+        getContentPane().add(bmanualBFT, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 150, 200));
 
         lautomatrix.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lautomatrix.setForeground(new java.awt.Color(255, 255, 255));
         lautomatrix.setText("MATRIZ DE ADYACENCIA AUTOMÁTICA");
-        getContentPane().add(lautomatrix, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 270, 30));
+        getContentPane().add(lautomatrix, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 270, 30));
 
         bmanualmatrix.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/manualmatrix1.png"))); // NOI18N
         bmanualmatrix.setBorder(null);
@@ -138,7 +139,7 @@ public class CargarGrafo extends javax.swing.JFrame {
                 bmanualmatrixActionPerformed(evt);
             }
         });
-        getContentPane().add(bmanualmatrix, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 150, 200));
+        getContentPane().add(bmanualmatrix, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 150, 200));
 
         bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);
@@ -234,13 +235,13 @@ public class CargarGrafo extends javax.swing.JFrame {
             JSONParser parser = new JSONParser();                                 
             FileReader reader = new FileReader(file.getAbsolutePath());
             Object obj = parser.parse(reader); 
-            JSONObject jsonObj = (JSONObject)obj;
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Graph");
+            this.jSONObject = (JSONObject)obj;                      
+           /* JSONArray jsonArray = (JSONArray) jSONObject.get("Graph");
             for(Object Obj: jsonArray){
                 JSONObject o = (JSONObject) Obj;
                 String s = String.valueOf(o.get("Node"));
                 System.out.println(s);
-            }               
+            }   */            
             }
             catch (Exception e) {
             }
@@ -258,7 +259,9 @@ public class CargarGrafo extends javax.swing.JFrame {
             lnombrearchivo.setText("");
             patch = "";
             permitir = false;
-            
+            MatrizAutomatica ma = new MatrizAutomatica(useraux, jSONObject);
+            ma.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
         }

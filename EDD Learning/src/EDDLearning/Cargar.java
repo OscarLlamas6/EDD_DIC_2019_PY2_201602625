@@ -104,7 +104,7 @@ public class Cargar extends javax.swing.JFrame {
         getContentPane().add(lloadusers, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         lfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
-        getContentPane().add(lfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 1000, 630));
+        getContentPane().add(lfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 630));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
