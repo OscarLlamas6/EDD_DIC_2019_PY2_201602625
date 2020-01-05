@@ -10,23 +10,25 @@ import javax.swing.Timer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class MatrizManual extends javax.swing.JFrame {
+public class AnchuraManual extends javax.swing.JFrame {
 
+    public ListaAdyacencia.NodoAdyacencia visitado;
     public JSONObject ObjGrafo;
     public Grafo grafo;
     public JFrame frame = this;
     public Usuario usuarioaux;
-    public static int velocidad = 1;
     public int x = 0;
     public int y = 0;
+    boolean primero = true;
     
-    public MatrizManual(Usuario usuarioaux, JSONObject ObjGrafo) {
+    public AnchuraManual(Usuario usuarioaux, JSONObject ObjGrafo) {
+        this.visitado = null;
         this.ObjGrafo = ObjGrafo;
-        this.usuarioaux = usuarioaux;        
+        this.usuarioaux = usuarioaux;       
         initComponents();
-        this.bnext.setEnabled(false);
+        bnext.setEnabled(false);
         SetearGrafoFinal(this.grafo, this.ObjGrafo);
-        this.setTitle("EDD Learning | MATRIZ DE ADYACENCIA - By Oscar Llamas");
+        this.setTitle("EDD Learning | RECORRIDO EN ANCHURA - By Oscar Llamas");
         this.setLocationRelativeTo(null);
         this.validate();
         this.revalidate();
@@ -36,13 +38,13 @@ public class MatrizManual extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bnext = new javax.swing.JButton();
         lnext = new javax.swing.JLabel();
-        scrollgrafo = new javax.swing.JScrollPane();
-        lgrafofinal = new javax.swing.JLabel();
+        bnext = new javax.swing.JButton();
+        txtRecorrido = new javax.swing.JTextArea();
+        lrecorrido = new javax.swing.JLabel();
+        scrolleddaux = new javax.swing.JScrollPane();
+        leddaux = new javax.swing.JLabel();
         bplay = new javax.swing.JButton();
-        txtExplicacion = new javax.swing.JTextArea();
-        lexplicacion = new javax.swing.JLabel();
         liniciar = new javax.swing.JLabel();
         lgoback = new javax.swing.JLabel();
         bsalir = new javax.swing.JButton();
@@ -55,6 +57,11 @@ public class MatrizManual extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        lnext.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lnext.setForeground(new java.awt.Color(255, 255, 255));
+        lnext.setText("SIGUIENTE");
+        getContentPane().add(lnext, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 650, -1, -1));
+
         bnext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/siguiente1.png"))); // NOI18N
         bnext.setBorder(null);
         bnext.setBorderPainted(false);
@@ -66,16 +73,26 @@ public class MatrizManual extends javax.swing.JFrame {
                 bnextActionPerformed(evt);
             }
         });
-        getContentPane().add(bnext, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 480, 90, 90));
+        getContentPane().add(bnext, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 550, 90, 90));
 
-        lnext.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lnext.setForeground(new java.awt.Color(255, 255, 255));
-        lnext.setText("SIGUIENTE");
-        getContentPane().add(lnext, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 580, -1, -1));
+        txtRecorrido.setBackground(new java.awt.Color(255, 255, 255));
+        txtRecorrido.setColumns(20);
+        txtRecorrido.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtRecorrido.setForeground(new java.awt.Color(0, 0, 0));
+        txtRecorrido.setLineWrap(true);
+        txtRecorrido.setRows(5);
+        txtRecorrido.setWrapStyleWord(true);
+        txtRecorrido.setFocusable(false);
+        getContentPane().add(txtRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 330, 60));
 
-        scrollgrafo.setViewportView(lgrafofinal);
+        lrecorrido.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lrecorrido.setForeground(new java.awt.Color(255, 255, 255));
+        lrecorrido.setText("Recorrido:");
+        getContentPane().add(lrecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, -1, -1));
 
-        getContentPane().add(scrollgrafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 400, 250));
+        scrolleddaux.setViewportView(leddaux);
+
+        getContentPane().add(scrolleddaux, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, 640, 90));
 
         bplay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/start1.png"))); // NOI18N
         bplay.setBorder(null);
@@ -88,31 +105,16 @@ public class MatrizManual extends javax.swing.JFrame {
                 bplayActionPerformed(evt);
             }
         });
-        getContentPane().add(bplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 90, 90));
-
-        txtExplicacion.setBackground(new java.awt.Color(255, 255, 255));
-        txtExplicacion.setColumns(20);
-        txtExplicacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        txtExplicacion.setForeground(new java.awt.Color(0, 0, 0));
-        txtExplicacion.setLineWrap(true);
-        txtExplicacion.setRows(5);
-        txtExplicacion.setWrapStyleWord(true);
-        txtExplicacion.setFocusable(false);
-        getContentPane().add(txtExplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 380, 70));
-
-        lexplicacion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        lexplicacion.setForeground(new java.awt.Color(255, 255, 255));
-        lexplicacion.setText("Explicación:");
-        getContentPane().add(lexplicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        getContentPane().add(bplay, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 550, 90, 90));
 
         liniciar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         liniciar.setForeground(new java.awt.Color(255, 255, 255));
         liniciar.setText("INICIAR");
-        getContentPane().add(liniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 580, -1, -1));
+        getContentPane().add(liniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 650, -1, -1));
 
         lgoback.setForeground(new java.awt.Color(255, 255, 255));
         lgoback.setText("REGRESAR");
-        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, -1, 30));
+        getContentPane().add(lgoback, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 680, 70, 30));
 
         bsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gobackp1.png"))); // NOI18N
         bsalir.setBorder(null);
@@ -125,19 +127,19 @@ public class MatrizManual extends javax.swing.JFrame {
                 bsalirActionPerformed(evt);
             }
         });
-        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 50, 50));
+        getContentPane().add(bsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 630, 50, 50));
 
         scrollimagen.setViewportView(lgrafo);
 
-        getContentPane().add(scrollimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 540, 540));
+        getContentPane().add(scrollimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 640, 340));
 
         ltitutlo.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         ltitutlo.setForeground(new java.awt.Color(255, 255, 255));
-        ltitutlo.setText("Grafos: Matriz de Adyacencia");
-        getContentPane().add(ltitutlo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+        ltitutlo.setText("Grafos: Recorrido en anchura");
+        getContentPane().add(ltitutlo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, -1));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
-        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 630));
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/graph-wallpaper.jpg"))); // NOI18N
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -149,55 +151,68 @@ public class MatrizManual extends javax.swing.JFrame {
     }//GEN-LAST:event_bsalirActionPerformed
   
     private void bplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bplayActionPerformed
-        y = 0;
-        bplay.setEnabled(false);
-        bnext.setEnabled(true);
+        this.y = 0;
+        this.txtRecorrido.setText("");
+        this.primero = true;
+        this.visitado = this.grafo.visitadosanchura.getHead();
+        this.bplay.setEnabled(false);
+        this.bnext.setEnabled(true);
     }//GEN-LAST:event_bplayActionPerformed
 
     private void bnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnextActionPerformed
-         if(y<x+1){
-                    bplay.setEnabled(false);
-                    ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
-                    icono.getImage().flush();
-                    lgrafo.setIcon(icono);
-                    lgrafo.setHorizontalAlignment(JLabel.CENTER);
-                    lgrafo.setVerticalAlignment(JLabel.TOP);
-                    lgrafo.validate();
-                    lgrafo.revalidate();
-                    scrollimagen.validate();
-                    scrollimagen.revalidate();
-                    if(y<(x/2)){
-                       txtExplicacion.setText("Creando vertices...");
-                    } else if(y>=(x/2) && y<x){
-                       txtExplicacion.setText("Creando adyacencias...");
-                    } else {
-                       txtExplicacion.setText("Matriz de adyacencia terminada.");
-                    }                                                           
-                    frame.validate();
-                    frame.revalidate();
-                    frame.repaint();
-                    y++;
-                    if(y>=x+1){
-                      bnext.setEnabled(false);
-                      bplay.setEnabled(true);
-                    }   
+        if(y<x+1){  
+            bplay.setEnabled(false);
+            ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
+            ImageIcon icono2 = new ImageIcon("C:/Reportes/Cola"+y+".png");
+            icono.getImage().flush();
+            icono2.getImage().flush();                  
+            lgrafo.setIcon(icono);
+            lgrafo.setHorizontalAlignment(JLabel.CENTER);
+            lgrafo.setVerticalAlignment(JLabel.TOP);
+            lgrafo.validate();
+            lgrafo.revalidate();
+            leddaux.setIcon(icono2);
+            leddaux.setHorizontalAlignment(JLabel.LEFT);
+            leddaux.validate();
+            leddaux.revalidate();
+            scrolleddaux.validate();
+            scrolleddaux.revalidate();
+            if(visitado != null){
+                String r = txtRecorrido.getText();
+                if(primero){
+                    primero = false;
+                    r+=visitado.getData();
                 } else {
-                    bnext.setEnabled(false);
+                    r+=", "+visitado.getData();
+                }
+               txtRecorrido.setText(r);
+               visitado = visitado.getNext();
+            }
+            frame.validate();
+            frame.revalidate();
+            frame.repaint();
+            y++;
+            if(y>=x+1){
+                bnext.setEnabled(false);
+                bplay.setEnabled(true);
+            }
+                } else {
                     bplay.setEnabled(true);
-                }   
+                    bnext.setEnabled(false);
+                }                        
     }//GEN-LAST:event_bnextActionPerformed
-     
-    public void SetearGrafoFinal(Grafo grafo, JSONObject jSONObject){
+      
+    public void SetearGrafoFinal(Grafo grafo, JSONObject jSONObject){    
         try {
+        String primer_nodo = "";
         JSONArray jsonArray = (JSONArray) jSONObject.get("Graph");
-        this.x = jsonArray.size()*2;
+        this.x = jsonArray.size();
         grafo = new Grafo(jsonArray.size());
         grafo.x = 0;
         for(Object Obj: jsonArray){
             JSONObject o = (JSONObject) Obj;
             String s = String.valueOf(o.get("Node"));
             grafo.AgregarVertice(s);
-            grafo.GraficarListaDeAdyacencia();
         } 
         for(Object Obj: jsonArray){
             JSONObject o = (JSONObject) Obj;
@@ -208,23 +223,28 @@ public class MatrizManual extends javax.swing.JFrame {
                 String vertice2 = String.valueOf(e.get("Node"));
                 grafo.AgregarArista(vertice1, vertice2);
             }
-            grafo.GraficarListaDeAdyacencia();
+
         }
-        grafo.GraficarMatrizDeAdyacencia();
-        grafo.GraficarGrafo("");
-        ImageIcon icono = new ImageIcon("C:/Reportes/GrafoFinal.png");
+        this.grafo = grafo;
+        if(this.grafo.getVertices().getHead() != null){
+            primer_nodo = String.valueOf(this.grafo.getVertices().getHead().getVertice().getDato());
+            this.grafo.RecorridoAnchura(primer_nodo);
+        }
+        
+        this.grafo.GraficarGrafo("");
+        ImageIcon icono = new ImageIcon("C:/Reportes/Grafo.png");
         icono.getImage().flush();
-        lgrafofinal.setIcon(icono);
-        lgrafofinal.setHorizontalAlignment(JLabel.CENTER);
-        lgrafofinal.setVerticalAlignment(JLabel.TOP);
-        lgrafofinal.validate();
-        lgrafofinal.revalidate();
-        scrollgrafo.validate();
-        scrollgrafo.revalidate();
+        lgrafo.setIcon(icono);
+        lgrafo.setHorizontalAlignment(JLabel.CENTER);
+        lgrafo.setVerticalAlignment(JLabel.TOP);
+        lgrafo.validate();
+        lgrafo.revalidate();
+        scrollimagen.validate();
+        scrollimagen.revalidate();
         frame.validate();
         frame.revalidate();        
         } catch (Exception e) {
-        }
+        }      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,15 +252,15 @@ public class MatrizManual extends javax.swing.JFrame {
     private javax.swing.JButton bplay;
     private javax.swing.JButton bsalir;
     private javax.swing.JLabel fondo;
-    private javax.swing.JLabel lexplicacion;
+    public javax.swing.JLabel leddaux;
     private javax.swing.JLabel lgoback;
     public javax.swing.JLabel lgrafo;
-    public javax.swing.JLabel lgrafofinal;
     private javax.swing.JLabel liniciar;
     private javax.swing.JLabel lnext;
+    private javax.swing.JLabel lrecorrido;
     public javax.swing.JLabel ltitutlo;
-    public javax.swing.JScrollPane scrollgrafo;
+    public javax.swing.JScrollPane scrolleddaux;
     public javax.swing.JScrollPane scrollimagen;
-    public javax.swing.JTextArea txtExplicacion;
+    public javax.swing.JTextArea txtRecorrido;
     // End of variables declaration//GEN-END:variables
 }

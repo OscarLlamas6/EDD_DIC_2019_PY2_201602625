@@ -305,7 +305,9 @@ public class CargarGrafo extends javax.swing.JFrame {
             lnombrearchivo.setText("");
             patch = "";
             permitir = false;
-            
+            AnchuraManual am = new AnchuraManual(useraux, jSONObject);
+            am.setVisible(true);
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "NO HA SELECCIONADO NINGUN ARCHIVO!");
         }
