@@ -107,7 +107,9 @@ public class PanelUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bavlActionPerformed
 
     private void bgraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bgraphActionPerformed
-        // TODO add your handling code here:
+        CargarGrafo c = new CargarGrafo(this.usuarioaux);
+        c.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_bgraphActionPerformed
 
     private void blogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blogoutActionPerformed
