@@ -54,7 +54,10 @@ public class TablaHash {
     
     
     public int funcionHash(long clave){
-      int direccion = (int)(clave%this.size);           
+      int direccion = (int)(clave%this.size);
+      while(direccion>this.size-1){
+          direccion = direccion - this.size;
+      }
       if(tabla[direccion]==null)
       {
           return direccion;
@@ -63,6 +66,9 @@ public class TablaHash {
           int i = 0;
           int aux = (int)(clave%7);
           direccion = (aux+1)*i;
+          while(direccion>this.size-1){
+          direccion = direccion - this.size;
+          }
           while(tabla[direccion]!=null){              
               i++;
               direccion = (aux+1)*i;

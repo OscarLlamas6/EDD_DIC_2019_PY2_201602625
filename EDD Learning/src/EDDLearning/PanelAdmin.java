@@ -17,6 +17,8 @@ public class PanelAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         llogout = new javax.swing.JLabel();
+        leddlearning = new javax.swing.JLabel();
+        beddlearning = new javax.swing.JButton();
         blogout = new javax.swing.JButton();
         lgestionar = new javax.swing.JLabel();
         bgestionar = new javax.swing.JButton();
@@ -32,7 +34,25 @@ public class PanelAdmin extends javax.swing.JFrame {
         llogout.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         llogout.setForeground(new java.awt.Color(255, 255, 255));
         llogout.setText("CERRAR SESION");
-        getContentPane().add(llogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 410, 160, 30));
+        getContentPane().add(llogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 380, 160, 30));
+
+        leddlearning.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        leddlearning.setForeground(new java.awt.Color(255, 255, 255));
+        leddlearning.setText("EDD Learning");
+        getContentPane().add(leddlearning, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 130, 30));
+
+        beddlearning.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/eddlearning1.png"))); // NOI18N
+        beddlearning.setBorder(null);
+        beddlearning.setBorderPainted(false);
+        beddlearning.setContentAreaFilled(false);
+        beddlearning.setFocusPainted(false);
+        beddlearning.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/eddlearning2.png"))); // NOI18N
+        beddlearning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beddlearningActionPerformed(evt);
+            }
+        });
+        getContentPane().add(beddlearning, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, 150, 200));
 
         blogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout1.png"))); // NOI18N
         blogout.setBorder(null);
@@ -45,12 +65,12 @@ public class PanelAdmin extends javax.swing.JFrame {
                 blogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(blogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, 150, 200));
+        getContentPane().add(blogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 190, 150, 200));
 
         lgestionar.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lgestionar.setForeground(new java.awt.Color(255, 255, 255));
         lgestionar.setText("GESTIONAR USUARIOS");
-        getContentPane().add(lgestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 410, 210, 30));
+        getContentPane().add(lgestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 380, 210, 30));
 
         bgestionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/gestionar1.png"))); // NOI18N
         bgestionar.setBorder(null);
@@ -63,12 +83,12 @@ public class PanelAdmin extends javax.swing.JFrame {
                 bgestionarActionPerformed(evt);
             }
         });
-        getContentPane().add(bgestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 150, 200));
+        getContentPane().add(bgestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 150, 200));
 
         lcargarusuarios.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lcargarusuarios.setForeground(new java.awt.Color(255, 255, 255));
         lcargarusuarios.setText("CARGA USUARIOS");
-        getContentPane().add(lcargarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, 30));
+        getContentPane().add(lcargarusuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, -1, 30));
 
         lcargar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cargar1.png"))); // NOI18N
         lcargar.setBorder(null);
@@ -81,7 +101,7 @@ public class PanelAdmin extends javax.swing.JFrame {
                 lcargarActionPerformed(evt);
             }
         });
-        getContentPane().add(lcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 150, 200));
+        getContentPane().add(lcargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 150, 200));
 
         lmenu.setFont(new java.awt.Font("Dialog", 1, 56)); // NOI18N
         lmenu.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,17 +138,26 @@ public class PanelAdmin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_bgestionarActionPerformed
 
+    private void beddlearningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beddlearningActionPerformed
+       Usuario usuario = new Usuario("ADMIN", "", "", "", "");
+       PanelUsuario pu = new PanelUsuario(usuario);
+       pu.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_beddlearningActionPerformed
+
     /**
      * @param args the command line arguments
      */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton beddlearning;
     private javax.swing.JButton bgestionar;
     private javax.swing.JButton blogout;
     private javax.swing.JLabel fondo;
     private javax.swing.JButton lcargar;
     private javax.swing.JLabel lcargarusuarios;
+    private javax.swing.JLabel leddlearning;
     private javax.swing.JLabel lgestionar;
     private javax.swing.JLabel llogout;
     private javax.swing.JLabel lmenu;

@@ -113,9 +113,17 @@ public class PanelUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bgraphActionPerformed
 
     private void blogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blogoutActionPerformed
-        VentanaInicio inicio = new VentanaInicio();
+        if(usuarioaux.getApellido().equals("") && usuarioaux.getPass().equals("") && usuarioaux.getCarnet().equals("")){
+            PanelAdmin pa = new PanelAdmin();
+            pa.setVisible(true);
+            this.dispose();
+        } else {
+           VentanaInicio inicio = new VentanaInicio();
         inicio.setVisible(true);
-        this.dispose();
+        this.dispose(); 
+        }
+        
+        
     }//GEN-LAST:event_blogoutActionPerformed
 
     

@@ -154,6 +154,9 @@ public class VentanaInicio extends javax.swing.JFrame {
     public Usuario UsuarioExiste(String carnet, String pass){
         long clave = Long.parseLong(carnet);
         int direccion = (int)(clave%tablausuarios.size);
+        while(direccion>tablausuarios.size-1){
+          direccion = direccion - tablausuarios.size;
+        }
          if(tablausuarios.tabla[direccion]==null){
             return null;
         } else {
@@ -163,6 +166,9 @@ public class VentanaInicio extends javax.swing.JFrame {
                int i = 0;
                int aux = (int)(clave%7);
                direccion = (aux+1)*i;
+               while(direccion>tablausuarios.size-1){
+            direccion = direccion - tablausuarios.size;
+            }
                while(direccion<tablausuarios.size){
                 if(tablausuarios.tabla[direccion]==null){ return null;}
                 if(tablausuarios.tabla[direccion].getCarnet().equals(carnet) && tablausuarios.tabla[direccion].getPass().equals(getHash(pass.getBytes(), "SHA-256"))){
