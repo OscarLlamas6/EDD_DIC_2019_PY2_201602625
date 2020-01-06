@@ -223,7 +223,7 @@ public class MatrizAutomatica extends javax.swing.JFrame {
         }
         grafo.GraficarMatrizDeAdyacencia();
         grafo.GraficarGrafo("");
-        ImageIcon icono = new ImageIcon("C:/Reportes/GrafoFinal.png");
+        ImageIcon icono = new ImageIcon("C:/Reportes/Grafo.png");
         icono.getImage().flush();
         lgrafofinal.setIcon(icono);
         lgrafofinal.setHorizontalAlignment(JLabel.CENTER);
