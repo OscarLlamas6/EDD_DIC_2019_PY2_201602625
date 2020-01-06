@@ -3,10 +3,7 @@ package EDDLearning;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
-import javax.swing.Timer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -161,7 +158,7 @@ public class ProfundidadManual extends javax.swing.JFrame {
     }//GEN-LAST:event_bplayActionPerformed
 
     private void bnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnextActionPerformed
-        if(y<x+1){
+        if(y<x+2){
             bplay.setEnabled(false);
             ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
             ImageIcon icono2 = new ImageIcon("C:/Reportes/Pila"+y+".png");
@@ -189,11 +186,14 @@ public class ProfundidadManual extends javax.swing.JFrame {
                 txtRecorrido.setText(r);
                 visitado = visitado.getNext();
             }
+            if(y>x){
+                      txtRecorrido.setText("Árbol generador del grafo (recorrido en profundidad) .");
+                    }
             frame.validate();
             frame.revalidate();
             frame.repaint();
             y++;
-            if(y>=x+1){
+            if(y>=x+2){
                 bnext.setEnabled(false);
                 bplay.setEnabled(true);
             }
@@ -230,6 +230,7 @@ public class ProfundidadManual extends javax.swing.JFrame {
         if(this.grafo.getVertices().getHead() != null){
             primer_nodo = String.valueOf(this.grafo.getVertices().getHead().getVertice().getDato());
             this.grafo.RecorridoProfundidadStack(primer_nodo);
+            this.grafo.GraficarArbolGeneradorProfundidad(primer_nodo);
         }
         
         this.grafo.GraficarGrafo("");

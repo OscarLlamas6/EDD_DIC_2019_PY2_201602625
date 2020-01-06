@@ -15,6 +15,7 @@ public class Grafo
     public static int x = 0;
     public ListaAdyacencia visitadosanchura;
     public ListaAdyacencia visitadosprofunidad;
+    public static String global = "";
 
    public Grafo(int v) 
     { 
@@ -126,17 +127,56 @@ public class Grafo
         ListaAdyacencia.NodoAdyacencia aux = vertices.ObtenerVertice(s).getVertice().getListaAdyacencia().getHead();
             while(aux!=null){
                 if(!VerticeVisitado(lista, aux.getData())){
-                    ProfundidadRecursion(aux.getData(), lista);
+                    this.global+=s+"->"+aux.getData()+";\n";
+                    ProfundidadRecursion(aux.getData(), lista);                   
                 }
                 aux = aux.getNext();
             }       
-    }
-    
-    public void RecorridoProfundidad(String s){
+    }       
+  
+    public void RecorridoProfundidadR(String s){
         ListaAdyacencia VerticesVisitados = new ListaAdyacencia();
         ProfundidadRecursion(s, VerticesVisitados);
-    }
-    
+    }        
+           
+    public void GraficarArbolGeneradorProfundidad(String s){       
+        File file = new File("C:/Reportes/salida4.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph ArbolGeneradorDFT{");
+            ps.println();
+            ps.println("node[shape=oval];");   
+            ps.println("rankdir=TB;");  
+            ps.println();
+            NodoVertice v = this.vertices.getHead();
+            while(v != null){
+                ps.println(v.getVertice().getDato()+";");
+                v = v.getNext();
+            }
+            ps.println();
+            this.global = "";
+            RecorridoProfundidadR(s);
+            ps.println();
+            ps.println(this.global);
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida4.dot -o C:/Reportes/Grafo"+this.x+".png";
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+        } catch (IOException ex) {
+            
+        }     
+
+        
+    } 
+          
     public void RecorridoProfundidadStackRecursion(ListaAdyacencia VerticesVisitados, Pila pila){           
       String s = pila.getCima().getDato();
       System.out.print(s+" ");
@@ -166,6 +206,7 @@ public class Grafo
        RecorridoProfundidadStackRecursion(VerticesVisitados, pila);
        pila.Graficar(this.x);
        GraficarGrafoProfundidad("");
+       pila.Graficar(this.x);
     } 
     
     public boolean VerticeVisitado(ListaAdyacencia lista, String s){
