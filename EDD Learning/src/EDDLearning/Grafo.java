@@ -64,6 +64,60 @@ public class Grafo
         }
         cola.Graficar(this.x);
         GraficarGrafoAnchura("");
+        cola.Graficar(this.x);
+    }
+    
+    public void GraficarArbolGeneradorAnchura(String s){       
+        File file = new File("C:/Reportes/salida4.dot");
+       if (file.exists()){ file.delete();}
+        try {
+            file.createNewFile();
+            PrintStream ps = new PrintStream(file);
+            ps.println("digraph ArbolGeneradorBFT{");
+            ps.println();
+            ps.println("node[shape=oval];");   
+            ps.println("rankdir=TB;");  
+            ps.println();
+            NodoVertice v = this.vertices.getHead();
+            while(v != null){
+                ps.println(v.getVertice().getDato()+";");
+                v = v.getNext();
+            }
+            ps.println();
+            ListaAdyacencia VerticesVisitados = new ListaAdyacencia();
+            Cola cola = new Cola();
+            AgregarVisitado(VerticesVisitados, s);
+            cola.enqueue(s);
+            while(cola.getSize()!=0){
+            s = cola.getFrente().getDato();
+            cola.dequeue(); 
+            System.out.print(s+" ");
+            ListaAdyacencia.NodoAdyacencia aux = this.vertices.ObtenerVertice(s).getVertice().getListaAdyacencia().getHead();
+            while(aux!=null){
+                if(!VerticeVisitado(VerticesVisitados, aux.getData())){
+                    AgregarVisitado(VerticesVisitados, aux.getData());
+                    cola.enqueue(aux.getData());
+                    ps.println(s+"->"+aux.getData()+";");
+                }
+                aux = aux.getNext();
+            }
+        }
+            ps.println();
+            ps.print("}");
+            ps.close();
+            String command = "dot.exe -Tpng C:/Reportes/salida4.dot -o C:/Reportes/Grafo"+this.x+".png";
+            Process p = Runtime.getRuntime().exec(command);
+            try {
+            TimeUnit.MILLISECONDS.sleep(200);
+        } catch (InterruptedException ex) {
+          
+        }
+            this.x++;
+        } catch (IOException ex) {
+            
+        }     
+
+        
     }
     
     public void ProfundidadRecursion(String s, ListaAdyacencia lista){

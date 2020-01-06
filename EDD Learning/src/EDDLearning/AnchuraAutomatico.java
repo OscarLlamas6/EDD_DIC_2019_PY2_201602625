@@ -33,7 +33,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 timer.setDelay(velocidad*1000);
                 bplay.setEnabled(false);
-                if(y<x+1){                  
+                if(y<x+2){                  
                     ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
                     ImageIcon icono2 = new ImageIcon("C:/Reportes/Cola"+y+".png");
                     icono.getImage().flush();
@@ -59,6 +59,9 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
                         }
                        txtRecorrido.setText(r);
                        visitado = visitado.getNext();
+                    }
+                    if(y>x){
+                      txtRecorrido.setText("Árbol generador del grafo (recorrido en anchura) .");
                     }
                     frame.validate();
                     frame.revalidate();
@@ -240,6 +243,7 @@ public class AnchuraAutomatico extends javax.swing.JFrame {
         if(this.grafo.getVertices().getHead() != null){
             primer_nodo = String.valueOf(this.grafo.getVertices().getHead().getVertice().getDato());
             this.grafo.RecorridoAnchura(primer_nodo);
+            this.grafo.GraficarArbolGeneradorAnchura(primer_nodo);
         }
         
         this.grafo.GraficarGrafo("");

@@ -160,7 +160,7 @@ public class AnchuraManual extends javax.swing.JFrame {
     }//GEN-LAST:event_bplayActionPerformed
 
     private void bnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnextActionPerformed
-        if(y<x+1){  
+        if(y<x+2){  
             bplay.setEnabled(false);
             ImageIcon icono = new ImageIcon("C:/Reportes/Grafo"+y+".png");
             ImageIcon icono2 = new ImageIcon("C:/Reportes/Cola"+y+".png");
@@ -188,11 +188,14 @@ public class AnchuraManual extends javax.swing.JFrame {
                txtRecorrido.setText(r);
                visitado = visitado.getNext();
             }
+            if(y>x){
+               txtRecorrido.setText("Árbol generador del grafo (recorrido en anchura) .");
+            }
             frame.validate();
             frame.revalidate();
             frame.repaint();
             y++;
-            if(y>=x+1){
+            if(y>=x+2){
                 bnext.setEnabled(false);
                 bplay.setEnabled(true);
             }
@@ -229,6 +232,7 @@ public class AnchuraManual extends javax.swing.JFrame {
         if(this.grafo.getVertices().getHead() != null){
             primer_nodo = String.valueOf(this.grafo.getVertices().getHead().getVertice().getDato());
             this.grafo.RecorridoAnchura(primer_nodo);
+            this.grafo.GraficarArbolGeneradorAnchura(primer_nodo);
         }
         
         this.grafo.GraficarGrafo("");
