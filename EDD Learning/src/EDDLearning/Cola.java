@@ -91,7 +91,7 @@ public class Cola {
             Process p = Runtime.getRuntime().exec(command);
             p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }

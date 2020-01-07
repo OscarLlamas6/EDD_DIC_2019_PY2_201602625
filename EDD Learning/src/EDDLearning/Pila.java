@@ -84,7 +84,7 @@ public class Pila {
             String command = "dot.exe -Tpng C:/Reportes/salida3.dot -o C:/Reportes/Pila"+x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }

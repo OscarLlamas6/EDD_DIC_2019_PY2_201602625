@@ -109,7 +109,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida4.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -166,7 +166,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida4.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -302,7 +302,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo.png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -353,7 +353,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -405,7 +405,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -497,7 +497,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }
@@ -607,7 +607,7 @@ public class Grafo
             String command = "dot.exe -Tpng C:/Reportes/salida.dot -o C:/Reportes/Grafo"+this.x+".png";
             Process p = Runtime.getRuntime().exec(command);
             try {
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(500);
         } catch (InterruptedException ex) {
           
         }

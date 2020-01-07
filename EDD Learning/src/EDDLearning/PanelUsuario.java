@@ -22,6 +22,8 @@ public class PanelUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bordenamientos = new javax.swing.JButton();
+        lordenamientos = new javax.swing.JLabel();
         blogout = new javax.swing.JButton();
         llogout = new javax.swing.JLabel();
         bgraph = new javax.swing.JButton();
@@ -34,6 +36,24 @@ public class PanelUsuario extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bordenamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ordenamientos1.png"))); // NOI18N
+        bordenamientos.setBorder(null);
+        bordenamientos.setBorderPainted(false);
+        bordenamientos.setContentAreaFilled(false);
+        bordenamientos.setFocusPainted(false);
+        bordenamientos.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ordenamientos2.png"))); // NOI18N
+        bordenamientos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bordenamientosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bordenamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 150, 200));
+
+        lordenamientos.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lordenamientos.setForeground(new java.awt.Color(255, 255, 255));
+        lordenamientos.setText("ORDENAMIENTOS");
+        getContentPane().add(lordenamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 520, 170, 30));
 
         blogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/logout1.png"))); // NOI18N
         blogout.setBorder(null);
@@ -121,10 +141,14 @@ public class PanelUsuario extends javax.swing.JFrame {
            VentanaInicio inicio = new VentanaInicio();
         inicio.setVisible(true);
         this.dispose(); 
-        }
-        
-        
+        }              
     }//GEN-LAST:event_blogoutActionPerformed
+
+    private void bordenamientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bordenamientosActionPerformed
+        CargarArreglo c = new CargarArreglo(usuarioaux);
+        c.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bordenamientosActionPerformed
 
     
 
@@ -132,10 +156,12 @@ public class PanelUsuario extends javax.swing.JFrame {
     private javax.swing.JButton bavl;
     private javax.swing.JButton bgraph;
     private javax.swing.JButton blogout;
+    private javax.swing.JButton bordenamientos;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel lavl;
     private javax.swing.JLabel lgraph;
     private javax.swing.JLabel llogout;
     public javax.swing.JLabel lmenu;
+    private javax.swing.JLabel lordenamientos;
     // End of variables declaration//GEN-END:variables
 }
