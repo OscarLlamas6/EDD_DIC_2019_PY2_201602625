@@ -22,6 +22,8 @@ public class PanelUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bb = new javax.swing.JButton();
+        lb = new javax.swing.JLabel();
         bordenamientos = new javax.swing.JButton();
         lordenamientos = new javax.swing.JLabel();
         blogout = new javax.swing.JButton();
@@ -32,10 +34,29 @@ public class PanelUsuario extends javax.swing.JFrame {
         lavl = new javax.swing.JLabel();
         lmenu = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
+        bavl1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        bb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/arbolb1.png"))); // NOI18N
+        bb.setBorder(null);
+        bb.setBorderPainted(false);
+        bb.setContentAreaFilled(false);
+        bb.setFocusPainted(false);
+        bb.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/arbolb2.png"))); // NOI18N
+        bb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bbActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bb, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 150, 200));
+
+        lb.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lb.setForeground(new java.awt.Color(255, 255, 255));
+        lb.setText("ÁRBOLES B");
+        getContentPane().add(lb, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 120, 30));
 
         bordenamientos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ordenamientos1.png"))); // NOI18N
         bordenamientos.setBorder(null);
@@ -66,12 +87,12 @@ public class PanelUsuario extends javax.swing.JFrame {
                 blogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(blogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 150, 200));
+        getContentPane().add(blogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 150, 200));
 
         llogout.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         llogout.setForeground(new java.awt.Color(255, 255, 255));
         llogout.setText("CERRAR SESION");
-        getContentPane().add(llogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 270, 160, 30));
+        getContentPane().add(llogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 530, 160, 30));
 
         bgraph.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/graph1.png"))); // NOI18N
         bgraph.setBorder(null);
@@ -84,12 +105,12 @@ public class PanelUsuario extends javax.swing.JFrame {
                 bgraphActionPerformed(evt);
             }
         });
-        getContentPane().add(bgraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 150, 200));
+        getContentPane().add(bgraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 110, 150, 200));
 
         lgraph.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lgraph.setForeground(new java.awt.Color(255, 255, 255));
         lgraph.setText("GRAFOS");
-        getContentPane().add(lgraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 90, 30));
+        getContentPane().add(lgraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 280, 90, 30));
 
         bavl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/avl1.png"))); // NOI18N
         bavl.setBorder(null);
@@ -116,6 +137,19 @@ public class PanelUsuario extends javax.swing.JFrame {
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/padmin-wallpaper.jpg"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 630));
+
+        bavl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/avl1.png"))); // NOI18N
+        bavl1.setBorder(null);
+        bavl1.setBorderPainted(false);
+        bavl1.setContentAreaFilled(false);
+        bavl1.setFocusPainted(false);
+        bavl1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/avl2.png"))); // NOI18N
+        bavl1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bavl1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bavl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 150, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -150,15 +184,28 @@ public class PanelUsuario extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bordenamientosActionPerformed
 
+    private void bbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bbActionPerformed
+        CargarArbolB c = new CargarArbolB(this.usuarioaux);
+        c.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_bbActionPerformed
+
+    private void bavl1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bavl1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bavl1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bavl;
+    private javax.swing.JButton bavl1;
+    private javax.swing.JButton bb;
     private javax.swing.JButton bgraph;
     private javax.swing.JButton blogout;
     private javax.swing.JButton bordenamientos;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel lavl;
+    private javax.swing.JLabel lb;
     private javax.swing.JLabel lgraph;
     private javax.swing.JLabel llogout;
     public javax.swing.JLabel lmenu;
